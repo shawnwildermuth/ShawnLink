@@ -1,0 +1,29 @@
+name: Deploy
+
+on: 
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+      - uses: azure/docker-login@v1
+        with:
+          login-server: wmcontainers.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Building Docker Image
+        working-directory: ./src
+        run: docker build . -t wmcontainers.azurecr.io/shawnlink:latest
+
+      - name: Push the Image
+        working-directory: ./src 
+        run: docker push wmcontainers.azurecr.io/shawnlink:latest
