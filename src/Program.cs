@@ -13,6 +13,7 @@ Host.CreateDefaultBuilder(args)
     bldr.ConfigureServices(svc =>
     {
       svc.AddTransient<LinkManager>();
+      svc.AddMemoryCache();
     });
 
     bldr.ConfigureAppConfiguration((hostingContext, config) =>
