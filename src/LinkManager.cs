@@ -23,7 +23,7 @@ namespace ShawnLink
     private CloudTableClient _tableClient;
     private CloudTable _table;
 
-    public LinkManager(IConfiguration config, 
+    public LinkManager(IConfiguration config,
       IWebHostEnvironment env,
       ILogger<LinkManager> logger,
       IMemoryCache cache)
@@ -56,7 +56,8 @@ namespace ShawnLink
       // Default to index.html
       _logger.LogWarning($"Link not found: {ctx.Request.Path}");
       ctx.Response.ContentType = "text/html";
-      await ctx.Response.WriteAsync(await File.ReadAllTextAsync(Path.Combine(_env.ContentRootPath, "index.html")));
+      var page = await File.ReadAllTextAsync(Path.Combine(_env.ContentRootPath, "index.html"));
+      await ctx.Response.WriteAsync(page);
     }
 
     async Task<string> FindRedirect(PathString path)
@@ -64,7 +65,7 @@ namespace ShawnLink
       var key = path.Value.ToLower().Substring(1); // Remove leading slash
       if (!string.IsNullOrWhiteSpace(key))
       {
-        
+
         Dictionary<string, string> linkCache;
 
         if (_cache.TryGetValue<Dictionary<string, string>>(LINKCACHE, out linkCache))
