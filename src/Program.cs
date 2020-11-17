@@ -27,9 +27,9 @@ Host.CreateDefaultBuilder(args)
     {
       app.UseStaticFiles();
 
-      var manager = app.ApplicationServices.GetService<LinkManager>();
       app.Run(async context =>
         {
+          var manager = app.ApplicationServices.GetService<LinkManager>();
           await manager.HandleRedirection(context);
         });
     });
