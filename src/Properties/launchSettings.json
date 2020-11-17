@@ -26,7 +26,6 @@
     },
     "Docker": {
       "commandName": "Docker",
-      "commandLineArgs": "--env-file ..\\secrets.env",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
