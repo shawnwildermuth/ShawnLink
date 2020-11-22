@@ -47,10 +47,6 @@ namespace ShawnLink
       {
         app.UseDeveloperExceptionPage();
       }
-      else
-      {
-        app.UseHttpsRedirection();
-      }
 
       app.Use(async (context, next) =>
       {
@@ -75,6 +71,7 @@ namespace ShawnLink
     void ConfigureBasicAuth(BasicAuthenticationOptions options)
     {
       options.Realm = "shawnl.ink";
+      options.AllowInsecureProtocol = true;
       options.Events = new BasicAuthenticationEvents
       {
         OnValidateCredentials = context =>
@@ -83,17 +80,17 @@ namespace ShawnLink
           {
             var claims = new[]
             {
-                   new Claim(
-                                      ClaimTypes.NameIdentifier,
-                                      context.Username,
-                                      ClaimValueTypes.String,
-                                      context.Options.ClaimsIssuer),
-                   new Claim(
-                                      ClaimTypes.Name,
-                                      context.Username,
-                                      ClaimValueTypes.String,
-                                      context.Options.ClaimsIssuer)
-                 };
+              new Claim(
+                ClaimTypes.NameIdentifier,
+                context.Username,
+                ClaimValueTypes.String,
+                context.Options.ClaimsIssuer),
+              new Claim(
+                ClaimTypes.Name,
+                context.Username,
+                ClaimValueTypes.String,
+                context.Options.ClaimsIssuer)
+            };
 
             context.Principal = new ClaimsPrincipal(
                 new ClaimsIdentity(claims, context.Scheme.Name));
@@ -104,6 +101,7 @@ namespace ShawnLink
           return Task.CompletedTask;
         }
       };
+      options.Validate();
     }
   }
 }
