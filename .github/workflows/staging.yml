@@ -1,9 +1,9 @@
-name: Deploy Production
+name: Deploy Staging
 
 on: 
   push:
     branches:
-      - main 
+      - next   
 
 jobs:
   build:
@@ -24,8 +24,8 @@ jobs:
 
       - name: Building Docker Image
         working-directory: ./src
-        run: docker build . -t wmcontainers.azurecr.io/shawnlink:latest
+        run: docker build . -t wmcontainers.azurecr.io/shawnlink:next
 
       - name: Push the Image
         working-directory: ./src 
-        run: docker push wmcontainers.azurecr.io/shawnlink:latest
+        run: docker push wmcontainers.azurecr.io/shawnlink:next
