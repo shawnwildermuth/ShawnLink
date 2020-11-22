@@ -1,6 +1,6 @@
 using Microsoft.Azure.Cosmos.Table;
 
-namespace ShawnLink
+namespace ShawnLink.Services
 {
   public class LinkEntity : TableEntity
   {
