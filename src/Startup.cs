@@ -32,8 +32,8 @@ namespace ShawnLink
 
       svc.AddSingleton(_config);
 
-      //svc.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
-      //   .AddBasic(ConfigureBasicAuth);
+      svc.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
+         .AddBasic(ConfigureBasicAuth);
 
       svc.AddAutoMapper(Assembly.GetEntryAssembly());
       svc.AddTransient<LinkManager>();
