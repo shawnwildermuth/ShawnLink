@@ -10,6 +10,7 @@ using idunno.Authentication.Basic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using ShawnLink.Configuration;
 using ShawnLink.Services;
 
@@ -18,10 +19,12 @@ namespace ShawnLink
   public class Startup
   {
     private ShawnConfiguration _config;
+    private readonly IHostEnvironment _env;
 
-    public Startup(IConfiguration config)
+    public Startup(IConfiguration config, IHostEnvironment env)
     {
       _config = new ShawnConfiguration(config);
+      _env = env;
     }
 
     public void ConfigureServices(IServiceCollection svc)
@@ -29,8 +32,8 @@ namespace ShawnLink
 
       svc.AddSingleton(_config);
 
-      svc.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
-         .AddBasic(ConfigureBasicAuth);
+      //svc.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
+      //   .AddBasic(ConfigureBasicAuth);
 
       svc.AddAutoMapper(Assembly.GetEntryAssembly());
       svc.AddTransient<LinkManager>();
@@ -40,6 +43,15 @@ namespace ShawnLink
 
     public void Configure(IApplicationBuilder app)
     {
+      if (_env.IsDevelopment())
+      {
+        app.UseDeveloperExceptionPage();
+      }
+      else
+      {
+        app.UseHttpsRedirection();
+      }
+
       app.Use(async (context, next) =>
       {
         var manager = app.ApplicationServices.GetService<LinkManager>();
