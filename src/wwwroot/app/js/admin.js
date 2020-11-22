@@ -213,10 +213,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup(props) {
     var link = Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])({
-      key: Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])(""),
-      url: Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])("")
+      key: Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])(''),
+      url: Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])('')
     });
-    var title = Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])("New Shawn Link");
+    var title = Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])('New Shawn Link');
     var isNew = Object(vue__WEBPACK_IMPORTED_MODULE_4__["ref"])(true);
     Object(vue__WEBPACK_IMPORTED_MODULE_4__["onMounted"])(function () {
       if (props.editKey) {
@@ -226,7 +226,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (found) {
           isNew.value = false;
-          title.value = "Editing Shawn Link";
+          title.value = 'Editing Shawn Link';
           link.value.key = found.key;
           link.value.url = found.url;
         }
@@ -245,56 +245,57 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _state__WEBPACK_IMPORTED_MODULE_5__["default"].isBusy.value = true;
-                _context.prev = 1;
+                _state__WEBPACK_IMPORTED_MODULE_5__["default"].setBusy('Saving Link...');
+                _state__WEBPACK_IMPORTED_MODULE_5__["default"].clearError();
+                _context.prev = 2;
 
                 if (!isNew.value) {
-                  _context.next = 10;
+                  _context.next = 11;
                   break;
                 }
 
-                _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/api/links", link.value);
+                _context.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post('/api/links', link.value);
 
-              case 5:
+              case 6:
                 result = _context.sent;
                 _state__WEBPACK_IMPORTED_MODULE_5__["default"].links.value.push(result.data);
-                _router__WEBPACK_IMPORTED_MODULE_7__["default"].push("/");
-                _context.next = 16;
+                _router__WEBPACK_IMPORTED_MODULE_7__["default"].push('/');
+                _context.next = 17;
                 break;
 
-              case 10:
-                _context.next = 12;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.put("/api/links", link.value);
+              case 11:
+                _context.next = 13;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.put('/api/links', link.value);
 
-              case 12:
+              case 13:
                 _result = _context.sent;
                 loc = _state__WEBPACK_IMPORTED_MODULE_5__["default"].links.value.find(function (l) {
                   return l.key === _result.data.key;
                 });
                 if (loc > 0) _state__WEBPACK_IMPORTED_MODULE_5__["default"].links.value.splice(loc, 1, _state__WEBPACK_IMPORTED_MODULE_5__["default"].data);
-                _router__WEBPACK_IMPORTED_MODULE_7__["default"].push("/");
+                _router__WEBPACK_IMPORTED_MODULE_7__["default"].push('/');
 
-              case 16:
-                _context.next = 21;
+              case 17:
+                _context.next = 22;
                 break;
 
-              case 18:
-                _context.prev = 18;
-                _context.t0 = _context["catch"](1);
-                _state__WEBPACK_IMPORTED_MODULE_5__["default"].error.value = "Could not save";
+              case 19:
+                _context.prev = 19;
+                _context.t0 = _context["catch"](2);
+                _state__WEBPACK_IMPORTED_MODULE_5__["default"].setError('Could not save');
 
-              case 21:
-                _context.prev = 21;
-                _state__WEBPACK_IMPORTED_MODULE_5__["default"].isBusy.value = false;
-                return _context.finish(21);
+              case 22:
+                _context.prev = 22;
+                _state__WEBPACK_IMPORTED_MODULE_5__["default"].clearBusy();
+                return _context.finish(22);
 
-              case 24:
+              case 25:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 18, 21, 24]]);
+        }, _callee, null, [[2, 19, 22, 25]]);
       }));
       return _onSave.apply(this, arguments);
     }
@@ -359,7 +360,7 @@ __webpack_require__.r(__webpack_exports__);
                   break;
                 }
 
-                _state__WEBPACK_IMPORTED_MODULE_4__["default"].error.value = 'Failed to copy to clipboard: Not supported';
+                _state__WEBPACK_IMPORTED_MODULE_4__["default"].setError('Failed to copy to clipboard: Not supported');
                 _context.next = 12;
                 break;
 
@@ -375,7 +376,7 @@ __webpack_require__.r(__webpack_exports__);
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](4);
-                _state__WEBPACK_IMPORTED_MODULE_4__["default"].error.value = 'Failed to copy to clipboard: Exception thrown';
+                _state__WEBPACK_IMPORTED_MODULE_4__["default"].setError('Failed to copy to clipboard: Exception thrown');
 
               case 12:
               case "end":
@@ -398,8 +399,8 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _state__WEBPACK_IMPORTED_MODULE_4__["default"].isBusy.value = true;
-                _state__WEBPACK_IMPORTED_MODULE_4__["default"].error.value = '';
+                _state__WEBPACK_IMPORTED_MODULE_4__["default"].setBusy('Deleting Links...');
+                _state__WEBPACK_IMPORTED_MODULE_4__["default"].clearError();
                 _context2.prev = 2;
                 _context2.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_6___default.a.delete("/api/links/".concat(link.key));
@@ -418,11 +419,11 @@ __webpack_require__.r(__webpack_exports__);
               case 9:
                 _context2.prev = 9;
                 _context2.t0 = _context2["catch"](2);
-                _state__WEBPACK_IMPORTED_MODULE_4__["default"].error.value = "Could not delete ".concat(link.key);
+                _state__WEBPACK_IMPORTED_MODULE_4__["default"].setError("Could not delete ".concat(link.key));
 
               case 12:
                 _context2.prev = 12;
-                _state__WEBPACK_IMPORTED_MODULE_4__["default"].isBusy.value = false;
+                _state__WEBPACK_IMPORTED_MODULE_4__["default"].clearBusy();
                 return _context2.finish(12);
 
               case 15:
@@ -492,10 +493,17 @@ var _hoisted_11 = {
   key: 1,
   class: "alert alert-info"
 };
-var _hoisted_12 = {
+
+var _hoisted_12 = /*#__PURE__*/Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("i", {
+  class: "fas fa-spin fa-spinner"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_13 = {
   class: "row"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   class: "col-12"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -521,7 +529,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   })])])]), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("div", _hoisted_8, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("div", _hoisted_9, [_ctx.error ? (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createBlock"])("div", _hoisted_10, Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(_ctx.error), 1
   /* TEXT */
-  )) : Object(vue__WEBPACK_IMPORTED_MODULE_0__["createCommentVNode"])("v-if", true), _ctx.isBusy ? (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createBlock"])("div", _hoisted_11, "Loading...")) : Object(vue__WEBPACK_IMPORTED_MODULE_0__["createCommentVNode"])("v-if", true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("div", _hoisted_12, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("div", _hoisted_13, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])(_component_router_view)])])])])]);
+  )) : Object(vue__WEBPACK_IMPORTED_MODULE_0__["createCommentVNode"])("v-if", true), _ctx.isBusy ? (Object(vue__WEBPACK_IMPORTED_MODULE_0__["openBlock"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createBlock"])("div", _hoisted_11, [_hoisted_12, Object(vue__WEBPACK_IMPORTED_MODULE_0__["createTextVNode"])(" " + Object(vue__WEBPACK_IMPORTED_MODULE_0__["toDisplayString"])(_ctx.busyMessage), 1
+  /* TEXT */
+  )])) : Object(vue__WEBPACK_IMPORTED_MODULE_0__["createCommentVNode"])("v-if", true), Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("div", _hoisted_13, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])("div", _hoisted_14, [Object(vue__WEBPACK_IMPORTED_MODULE_0__["createVNode"])(_component_router_view)])])])])]);
 }
 
 /***/ }),
@@ -583,7 +593,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.onSave();
     }, ["prevent"]))
   }, [Object(vue__WEBPACK_IMPORTED_MODULE_1__["createVNode"])("div", _hoisted_2, [_hoisted_3, Object(vue__WEBPACK_IMPORTED_MODULE_1__["withDirectives"])(Object(vue__WEBPACK_IMPORTED_MODULE_1__["createVNode"])("input", {
-    type: "t'ext",
+    type: "text",
     id: "key",
     class: "form-control",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
@@ -822,7 +832,8 @@ var routes = [{
 }, {
   path: '/editor',
   name: 'NewLink',
-  component: _views_Editor__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _views_Editor__WEBPACK_IMPORTED_MODULE_2__["default"],
+  beforeEnter: confirmLoaded
 }];
 var router = Object(vue_router__WEBPACK_IMPORTED_MODULE_0__["createRouter"])({
   history: Object(vue_router__WEBPACK_IMPORTED_MODULE_0__["createWebHashHistory"])(),
@@ -853,6 +864,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {
   isBusy: Object(vue__WEBPACK_IMPORTED_MODULE_2__["ref"])(false),
+  busyMessage: Object(vue__WEBPACK_IMPORTED_MODULE_2__["ref"])(''),
   error: Object(vue__WEBPACK_IMPORTED_MODULE_2__["ref"])(''),
   links: Object(vue__WEBPACK_IMPORTED_MODULE_2__["ref"])([]),
   isLoaded: Object(vue__WEBPACK_IMPORTED_MODULE_2__["ref"])(false),
@@ -865,35 +877,55 @@ var state = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.isBusy.value = true;
-              _context.prev = 1;
-              _context.next = 4;
+              _this.setBusy('Loading Links...');
+
+              _this.clearError();
+
+              _context.prev = 2;
+              _context.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/links');
 
-            case 4:
+            case 5:
               result = _context.sent;
               _this.links.value = result.data;
               _this.isLoaded.value = true;
-              _context.next = 12;
+              _context.next = 13;
               break;
 
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
-              _this.error.value = 'Failed to load links';
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](2);
 
-            case 12:
-              _context.prev = 12;
-              _this.isBusy.value = false;
-              return _context.finish(12);
+              _this.setError('Failed to load links');
 
-            case 15:
+            case 13:
+              _context.prev = 13;
+
+              _this.clearBusy();
+
+              return _context.finish(13);
+
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1, 9, 12, 15]]);
+      }, _callee, null, [[2, 10, 13, 16]]);
     }))();
+  },
+  setError: function setError(err) {
+    this.error.value = err;
+  },
+  clearError: function clearError() {
+    this.error.value = '';
+  },
+  setBusy: function setBusy(msg) {
+    this.isBusy.value = true;
+    if (msg) this.busyMessage.value = msg;
+  },
+  clearBusy: function clearBusy() {
+    this.isBusy.value = false;
+    this.busyMessage.value = '';
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (state);

@@ -27,7 +27,8 @@ const routes = [
   {
     path: '/editor',
     name: 'NewLink',
-    component: Editor
+    component: Editor,
+    beforeEnter: confirmLoaded
   }
 ];
 

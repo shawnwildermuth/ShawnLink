@@ -5,7 +5,7 @@
       <div class="form-group">
         <label for="key">Key</label>
         <input
-          type="t'ext"
+          type="text"
           id="key"
           class="form-control"
           v-model="link.key"
@@ -31,22 +31,22 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
-import state from "@/state";
-import http from "axios";
-import router from "@/router";
+import { onMounted, ref } from 'vue';
+import state from '@/state';
+import http from 'axios';
+import router from '@/router';
 
 export default {
   props: {
-    editKey: { required: false },
+    editKey: { required: false }
   },
   setup(props) {
     const link = ref({
-      key: ref(""),
-      url: ref(""),
+      key: ref(''),
+      url: ref('')
     });
 
-    const title = ref("New Shawn Link");
+    const title = ref('New Shawn Link');
     const isNew = ref(true);
 
     onMounted(() => {
@@ -54,7 +54,7 @@ export default {
         const found = state.links.value.find((l) => l.key === props.editKey);
         if (found) {
           isNew.value = false;
-          title.value = "Editing Shawn Link";
+          title.value = 'Editing Shawn Link';
           link.value.key = found.key;
           link.value.url = found.url;
         }
@@ -62,24 +62,25 @@ export default {
     });
 
     async function onSave() {
-      state.isBusy.value = true;
+      state.setBusy('Saving Link...');
+      state.clearError();
       try {
         if (isNew.value) {
           // add to the list
-          const result = await http.post("/api/links", link.value);
+          const result = await http.post('/api/links', link.value);
           state.links.value.push(result.data);
-          router.push("/");
+          router.push('/');
         } else {
           // update the Link
-          const result = await http.put("/api/links", link.value);
+          const result = await http.put('/api/links', link.value);
           const loc = state.links.value.find(l => l.key === result.data.key);
           if (loc > 0) state.links.value.splice(loc, 1, state.data);
-          router.push("/");
+          router.push('/');
         }
       } catch {
-        state.error.value = "Could not save";
+        state.setError('Could not save');
       } finally {
-        state.isBusy.value = false;
+        state.clearBusy();
       }
     }
 
@@ -89,6 +90,6 @@ export default {
       title,
       isNew
     };
-  },
+  }
 };
 </script>

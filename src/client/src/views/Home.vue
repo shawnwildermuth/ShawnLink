@@ -42,19 +42,19 @@ export default {
 
     async function copyToClipboard (link) {
       if (!navigator.clipboard) {
-        state.error.value = 'Failed to copy to clipboard: Not supported';
+        state.setError('Failed to copy to clipboard: Not supported');
       } else {
         try {
           await navigator.clipboard.writeText(`https://shawnl.ink/${link.key}`);
         } catch {
-          state.error.value = 'Failed to copy to clipboard: Exception thrown';
+          state.setError('Failed to copy to clipboard: Exception thrown');
         }
       }
     }
 
     async function deleteLink(link) {
-      state.isBusy.value = true;
-      state.error.value = '';
+      state.setBusy('Deleting Links...');
+      state.clearError();
       try {
         const result = await http.delete(`/api/links/${link.key}`);
         if (result.status === 200) {
@@ -62,9 +62,9 @@ export default {
           if (loc > -1) state.links.value.splice(loc, 1);
         }
       } catch {
-        state.error.value = `Could not delete ${link.key}`;
+        state.setError(`Could not delete ${link.key}`);
       } finally {
-        state.isBusy.value = false;
+        state.clearBusy();
       }
     }
 

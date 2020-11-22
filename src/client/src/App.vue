@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-12">
         <div class="alert alert-danger" v-if="error">{{ error }}</div>
-        <div class="alert alert-info" v-if="isBusy">Loading...</div>
+        <div class="alert alert-info" v-if="isBusy"><i class="fas fa-spin fa-spinner" /> {{ busyMessage }}</div>
         <div class="row">
           <div class="col-12">
             <router-view />
