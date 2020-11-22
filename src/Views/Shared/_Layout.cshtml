@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Shawnl.ink</title>
+  <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+  @RenderSection("styles", false)
+</head>
+<body>
+  @RenderBody()
+  <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="~/lib/fortawesome/fontawesome-free/js/solid.min.js"></script>
+  <script src="~/lib/fortawesome/fontawesome-free/js/fontawesome.min.js"></script>
+  @RenderSection("scripts", false)
+</body>
+</html>

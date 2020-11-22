@@ -25,3 +25,5 @@ Here are a couple of shortened links:
 
 - https://shawnl.ist/hwfilm
 - https://shawnl.ist/courses
+
+I explained what I was doing
