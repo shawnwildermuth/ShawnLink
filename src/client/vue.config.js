@@ -1,7 +1,7 @@
 module.exports = {
+  transpileDependencies: true,
   outputDir: '../wwwroot/app',
   filenameHashing: false,
-  lintOnSave: true,
   pages: {
     admin: 'src/admin.js'
   },
