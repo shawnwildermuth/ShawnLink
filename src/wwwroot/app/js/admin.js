@@ -150,10 +150,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
 
+    function shorten(val) {
+      const position = val.split("/", 3).join("/").length;
+      return val.substring(0, position) + "/...";
+    }
+
     return {
       links: _state__WEBPACK_IMPORTED_MODULE_0__["default"].links,
       copyToClipboard,
-      deleteLink
+      deleteLink,
+      shorten
     };
   }
 
@@ -351,7 +357,7 @@ const _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElemen
 );
 
 const _hoisted_4 = {
-  class: "table table-sm table-bordered"
+  class: "table table-sm table-bordered table-responsive"
 };
 
 const _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Key"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Destination"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Link"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th")])], -1
@@ -380,8 +386,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: l.url,
       title: l.url
-    }, "Hover for Link", 8
-    /* PROPS */
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.shorten(l.url)), 9
+    /* TEXT, PROPS */
     , _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: l.url
     }, "https://shawnl.ink/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(l.key), 9

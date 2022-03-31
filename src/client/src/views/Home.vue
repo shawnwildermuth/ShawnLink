@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <h2>Links Management</h2>
-      <table class="table table-sm table-bordered" v-cloak>
+      <table class="table table-sm table-bordered table-responsive" v-cloak>
         <thead>
           <tr>
             <th>Key</th>
@@ -14,7 +14,7 @@
         <tbody>
           <tr v-for="l in links" :key="l">
             <td>{{ l.key }}</td>
-            <td><a :href="l.url" :title="l.url">Hover for Link</a></td>
+            <td><a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a></td>
             <td>
               <a :href="l.url">https://shawnl.ink/{{ l.key }}</a>
             </td>
@@ -87,10 +87,16 @@ export default {
       }
     }
 
+    function shorten(val) {
+      const position = val.split("/", 3).join("/").length;
+      return val.substring(0, position) + "/...";
+    }
+
     return {
       links: state.links,
       copyToClipboard,
       deleteLink,
+      shorten
     };
   },
 };
