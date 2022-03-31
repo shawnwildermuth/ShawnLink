@@ -11,9 +11,10 @@ const state = {
     this.clearError();
     try {
       var result = await http.get('/api/links');
-      this.links.value = result.data;
+      this.links.value = result.data.sort((a,b) => a.key.localeCompare(b.key));
       this.isLoaded.value = true;
-    } catch {
+    } catch (e) {
+      console.error(e);
       this.setError('Failed to load links');
     } finally {
       this.clearBusy();

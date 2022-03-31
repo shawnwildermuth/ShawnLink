@@ -10,6 +10,7 @@ using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using ShawnLink.Configuration;
 
 namespace ShawnLink.Services
 {
@@ -26,12 +27,12 @@ namespace ShawnLink.Services
     private CloudTableClient _tableClient;
     private CloudTable _table;
 
-    public LinkManager(IConfiguration config,
+    public LinkManager(ShawnConfiguration config,
       IWebHostEnvironment env,
       ILogger<LinkManager> logger,
       IMemoryCache cache)
     {
-      _connectionString = config["Storage:ConnectionString"];
+      _connectionString = config.Storage.ConnectionString;
       _account = CloudStorageAccount.Parse(_connectionString);
       _tableClient = _account.CreateCloudTableClient();
       _table = _tableClient.GetTableReference("links");
