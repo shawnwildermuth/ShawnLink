@@ -20,6 +20,19 @@ const state = {
       this.clearBusy();
     }
   },
+  async loadSummaries() {
+    this.setBusy("Loading Report");
+    this.clearError();
+    try {
+      var result = await http.get('/api/links/summary');
+      return result.data; //.sort((a,b) => a.key.localeCompare(b.key));
+    } catch (e) {
+      console.error(e);
+      this.setError('Failed to load report');
+    } finally {
+      this.clearBusy();
+    }
+  },
   setError(err) { this.error.value = err; },
   clearError() { this.error.value = ''; },
   setBusy(msg) {

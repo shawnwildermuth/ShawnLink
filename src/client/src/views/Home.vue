@@ -2,49 +2,53 @@
   <div class="row">
     <div class="col-12">
       <h2>Links Management</h2>
-      <table class="table table-sm table-bordered table-responsive" v-cloak>
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Destination</th>
-            <th>Link</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="l in links" :key="l">
-            <td>{{ l.key }}</td>
-            <td><a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a></td>
-            <td>
-              <a :href="l.url">https://shawnl.ink/{{ l.key }}</a>
-            </td>
-            <td>
-              <div class="btn-group" role="group">
-                <router-link
-                  :to="{ name: 'EditLink', params: { editKey: l.key } }"
-                  type="button"
-                  class="btn btn-sm btn-info"
-                  >Edit</router-link
-                >
-                <button
-                  type="button"
-                  class="btn btn-sm btn-info"
-                  @click="deleteLink(l)"
-                >
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-info"
-                  @click="copyToClipboard(l)"
-                >
-                  Copy
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-sm table-bordered" v-cloak>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Destination</th>
+              <th>Link</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="l in links" :key="l">
+              <td>{{ l.key }}</td>
+              <td>
+                <a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a>
+              </td>
+              <td>
+                <a :href="l.url">https://shawnl.ink/{{ l.key }}</a>
+              </td>
+              <td>
+                <div class="btn-group" role="group">
+                  <router-link
+                    :to="{ name: 'EditLink', params: { editKey: l.key } }"
+                    type="button"
+                    class="btn btn-sm btn-info"
+                    >Edit</router-link
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-info"
+                    @click="deleteLink(l)"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-info"
+                    @click="copyToClipboard(l)"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -96,7 +100,7 @@ export default {
       links: state.links,
       copyToClipboard,
       deleteLink,
-      shorten
+      shorten,
     };
   },
 };
