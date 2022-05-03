@@ -1,0 +1,212 @@
+[
+	{
+		"url": "https://helloworldfilm.com",
+		"domain": "shawnlink",
+		"key": "hwfilm"
+	},
+	{
+		"url": "https://imfinefilm.com",
+		"domain": "shawnlink",
+		"key": "imfine"
+	},
+	{
+		"url": "https://pluralsight.com/author/shawn-wildermuth",
+		"domain": "shawnlink",
+		"key": "psauthor"
+	},
+	{
+		"url": "https://youtu.be/SjR24_UOOzE",
+		"domain": "shawnlink",
+		"key": "hwtrailer"
+	},
+	{
+		"url": "https://courses.wilderminds.com/",
+		"domain": "shawnlink",
+		"key": "courses"
+	},
+	{
+		"url": "https://pluralsight.com/courses/web-api-design",
+		"domain": "shawnlink",
+		"key": "apicourse"
+	},
+	{
+		"url": "https://www.youtube.com/c/swildermuth",
+		"domain": "shawnlink",
+		"key": "yt"
+	},
+	{
+		"url": "https://wildermuth.com",
+		"domain": "shawnlink",
+		"key": "blog"
+	},
+	{
+		"url": "https://helloworldfilm.com/dls/HWFilm-PressRelease.pdf",
+		"domain": "shawnlink",
+		"key": "hw-pressrelease"
+	},
+	{
+		"url": "https://helloworldfilm.com/dls/HWFilm-OnePager.pdf",
+		"domain": "shawnlink",
+		"key": "hw-onepager"
+	},
+	{
+		"url": "https://pluralsight.com/courses/bootstrap-grid-creating-responsive-layout",
+		"domain": "shawnlink",
+		"key": "psbsgrid"
+	},
+	{
+		"url": "https://itunes.apple.com/us/movie/hello-world/id1538916434",
+		"domain": "shawnlink",
+		"key": "preorder-hwfilm"
+	},
+	{
+		"url": "https://pluralsight.com/courses/vue-building-forms",
+		"domain": "shawnlink",
+		"key": "psvueforms"
+	},
+	{
+		"url": "https://www.pluralsight.com/courses/aspnetcore-mvc-efcore-bootstrap-angular-web",
+		"domain": "shawnlink",
+		"key": "pscore"
+	},
+	{
+		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12fVibsOjKw7chLqnK-FoBwO",
+		"domain": "shawnlink",
+		"key": "bs4-free"
+	},
+	{
+		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12c23GOhn-symlLFOLJfV94t",
+		"domain": "shawnlink",
+		"key": "vue-free"
+	},
+	{
+		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12dzEfHNroS9QHoE3WefNCxh",
+		"domain": "shawnlink",
+		"key": "signalr-free"
+	},
+	{
+		"url": "https://youtu.be/RV0eHvs5ZYI",
+		"domain": "shawnlink",
+		"key": "fa5-free"
+	},
+	{
+		"url": "https://app.milanote.com/1MummW1jllYU3S?p=bZ6KiEUON5q",
+		"domain": "shawnlink",
+		"key": "view-imfine-board"
+	},
+	{
+		"url": "https://youtu.be/zK-_Lq8d1h8?t=303",
+		"domain": "shawnlink",
+		"key": "dnf-f2f-recording-1"
+	},
+	{
+		"url": "https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0",
+		"domain": "shawnlink",
+		"key": "minimal-api-docs"
+	},
+	{
+		"url": "https://www.youtube.com/watch?v=Q_zXFeP-QNI",
+		"domain": "shawnlink",
+		"key": "yt-minimal-api"
+	},
+	{
+		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12fj4eLqBmjgCfdvsh2u3tN9",
+		"domain": "shawnlink",
+		"key": "codingshorts"
+	},
+	{
+		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12eDLwEdCwK-YrZXQ_vhJrHv",
+		"domain": "shawnlink",
+		"key": "rants"
+	},
+	{
+		"url": "https://www.seedandspark.com/fund/dontworry-imfine",
+		"domain": "shawnlink",
+		"key": "imfine-fund"
+	},
+	{
+		"url": "https://www.seedandspark.com/fund/dontworry-imfine",
+		"domain": "shawnlink",
+		"key": "fund-imfine"
+	},
+	{
+		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12eFFFW3M3mp_HHyT0WJoyHf",
+		"domain": "shawnlink",
+		"key": "themaintainers"
+	},
+	{
+		"url": "https://github.com/bloomrpc/bloomrpc",
+		"domain": "shawnlink",
+		"key": "bloomrpc"
+	},
+	{
+		"url": "https://developers.google.com/protocol-buffers/docs/reference/google.protobuf",
+		"domain": "shawnlink",
+		"key": "protobuf-wellknown"
+	},
+	{
+		"url": "https://developers.google.com/protocol-buffers/docs/reference/proto3-spec",
+		"domain": "shawnlink",
+		"key": "protobuf-spec"
+	},
+	{
+		"url": "https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#run-on-linux-macos",
+		"domain": "shawnlink",
+		"key": "cosmosdb-on-mac"
+	},
+	{
+		"url": "https://docs.microsoft.com/en-us/azure/cosmos-db/partial-document-update-getting-started",
+		"domain": "shawnlink",
+		"key": "cosmos-db-partialupdate"
+	},
+	{
+		"url": "https://www.amcharts.com/visited_states/#US-AL,US-AZ,US-CA,US-CO,US-FL,US-GA,US-ID,US-IL,US-IN,US-LA,US-MA,US-MD,US-MI,US-MO,US-MS,US-MT,US-NJ,US-NV,US-NY,US-OH,US-OR,US-PA,US-RI,US-TN,US-TX,US-UT,US-VT,US-WA,US-WY",
+		"domain": "shawnlink",
+		"key": "ourstates"
+	},
+	{
+		"url": "https://www.amcharts.com/visited_countries/#AT,BE,BG,HR,CZ,FR,DE,GR,HU,IE,IT,NL,NO,PL,RO,ES,SE,CH,TR,GB,CA,US,AR,CL,FK,UY,ZA,CN,IN,IL,MY,NP,SG,TH,AU,NZ",
+		"domain": "shawnlink",
+		"key": "ourcountries"
+	},
+	{
+		"url": "https://kit.co/ShawnWildermuth/film-shooting-rig",
+		"domain": "shawnlink",
+		"key": "mykit"
+	},
+	{
+		"url": "https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md",
+		"domain": "shawnlink",
+		"key": "csharp-feature-status"
+	},
+	{
+		"url": "https://pluralsight.com/courses/aspnet-web-api-building",
+		"domain": "shawnlink",
+		"key": "pscoreapi"
+	},
+	{
+		"url": "https://ashy-meadow-03572a410.1.azurestaticapps.net",
+		"domain": "shawnlink",
+		"key": "atldevcon"
+	},
+	{
+		"url": "https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator",
+		"domain": "shawnlink",
+		"key": "cosmosdb-emulator"
+	},
+	{
+		"url": "https://nodejs.org/en/download/",
+		"domain": "shawnlink",
+		"key": "install-node"
+	},
+	{
+		"url": "https://www.typescriptlang.org/play",
+		"domain": "shawnlink",
+		"key": "ts-playground"
+	},
+	{
+		"url": "https://devblogs.microsoft.com/typescript/a-proposal-for-type-syntax-in-javascript/",
+		"domain": "shawnlink",
+		"key": "ms-proposal-type-syntax"
+	}
+]

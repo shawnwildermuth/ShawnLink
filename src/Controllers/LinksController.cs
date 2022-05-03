@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,29 +17,37 @@ namespace ShawnLink.Controllers
   {
     private readonly ILogger<LinksController> _logger;
     private readonly LinkManager _linkManager;
-    private readonly IMapper _mapper;
+    private readonly ILinkRepository _repo;
 
-    public LinksController(ILogger<LinksController> logger, LinkManager linkManager, IMapper mapper)
+    public LinksController(ILogger<LinksController> logger, 
+      LinkManager linkManager,
+      ILinkRepository repo)
     {
       _logger = logger;
       _linkManager = linkManager;
-      _mapper = mapper;
+      _repo = repo;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<LinkModel>>> Get()
+    public async Task<ActionResult<IEnumerable<Link>>> Get()
     {
-      return Ok(_mapper.Map<IEnumerable<LinkModel>>(await _linkManager.GetAll()));
+      return Ok(await _linkManager.GetAll());
+    }
+
+    [HttpGet("summary")]
+    public async Task<ActionResult<IEnumerable<RedirectSummary>>> Summary()
+    {
+      return Ok(await _repo.GetRedirectSummaries());
     }
 
     [HttpPost]
-    public async Task<ActionResult<LinkModel>> Post([FromBody] LinkModel model)
+    public async Task<ActionResult<Link>> Post([FromBody] Link model)
     {
       try
       {
         var result = await _linkManager.InsertLink(model.Key, model.Url);
         if (result is null) return BadRequest("Duplicate Key");
-        return Ok(_mapper.Map<LinkModel>(result));
+        return Ok(result);
       }
       catch (Exception ex)
       {
@@ -51,12 +58,12 @@ namespace ShawnLink.Controllers
     }
 
     [HttpPut]
-    public async Task<ActionResult<LinkModel>> Put([FromBody] LinkModel model)
+    public async Task<ActionResult<Link>> Put([FromBody] Link model)
     {
       try
       {
         var result = await _linkManager.UpdateLink(model.Key, model.Url);
-        if (result is not null) return Ok(_mapper.Map<LinkModel>(result));
+        if (result is not null) return Ok(result);
       }
       catch (Exception ex)
       {

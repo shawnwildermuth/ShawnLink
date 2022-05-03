@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/Home';
 import Editor from '@/views/Editor';
+import SummaryReport from '@/views/SummaryReport';
 import state from '@/state';
 
 const confirmLoaded = (to, from, next) => {
@@ -29,6 +30,11 @@ const routes = [
     name: 'NewLink',
     component: Editor,
     beforeEnter: confirmLoaded
+  },
+  {
+    path: '/summaries',
+    name: 'Summaries',
+    component: SummaryReport
   }
 ];
 
