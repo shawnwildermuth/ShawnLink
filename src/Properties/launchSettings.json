@@ -19,7 +19,7 @@
     "shawnlink": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:5001/psauthor",
+      "launchUrl": "https://localhost:5001/author",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

@@ -1,5 +1,8 @@
+using System.IO;
+using System.Text.Json;
 using idunno.Authentication.Basic;
 using Microsoft.Extensions.DependencyInjection;
+using ShawnLink.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +17,26 @@ builder.Services.AddTransient<LinkManager>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<IAccumulatorQueue, AccumulatorQueue>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<ILinkRepository, LinkRepository>();
+builder.Services.AddScoped<ILinkRepository, LinkRepository>();
 builder.Services.AddHostedService<AccumulatorBackgroundService>();
+builder.Services.AddDbContext<LinkContext>();
+
 
 var app = builder.Build();
+
+if (args is not null && args.Count() == 1 && args[0] == "/seed")
+{
+  // ...
+  var json = File.ReadAllText("./links.json");
+  var opt = new JsonSerializerOptions();
+  opt.PropertyNameCaseInsensitive = true;
+  var links = JsonSerializer.Deserialize<Link[]>(json, opt);
+  using var scope = app.Services.CreateScope();
+  var ctx = scope.ServiceProvider.GetService<LinkContext>();
+  ctx.AddRange(links);
+  ctx.SaveChanges();
+  return;
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -26,18 +45,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-app.Use(async (context, next) =>
-{
-  var manager = app.Services.GetService<LinkManager>();
-  if (!await manager.HandleRedirection(context)) await next();
-});
-
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute("Admin", "/admin", new { controller = "Admin", action = "Index" });
+
+app.Use(async (context, next) =>
+{
+  using var scope = app.Services.CreateScope();
+  var manager = scope.ServiceProvider.GetService<LinkManager>();
+  if (!await manager.HandleRedirection(context)) await next();
+});
+
+
 app.MapFallbackToController("Index", "Fallback");
 
 app.Run();

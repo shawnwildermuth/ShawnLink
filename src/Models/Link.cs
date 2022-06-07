@@ -10,12 +10,8 @@ namespace ShawnLink.Models;
 
 public class Link
 {
-  [JsonPropertyName("id")]
-  public string Id { get; set; } = Guid.NewGuid().ToString();
-  [JsonPropertyName("key")]
+  public Guid Id { get; set; } = Guid.NewGuid();
   public string Key { get; set; }
-  [JsonPropertyName("url")]
   public string Url { get; set; }
-  [JsonPropertyName("domain")]
   public string Domain { get; set; } = "shawnlink";
 }
