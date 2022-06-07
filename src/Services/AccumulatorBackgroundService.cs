@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -13,15 +14,15 @@ public class AccumulatorBackgroundService : BackgroundService
 {
   private readonly ILogger<AccumulatorBackgroundService> _logger;
   private readonly IAccumulatorQueue _queue;
-  private readonly ILinkRepository _repo;
+  private readonly IServiceProvider _service;
 
   public AccumulatorBackgroundService(ILogger<AccumulatorBackgroundService> logger, 
     IAccumulatorQueue queue, 
-    ILinkRepository repo)
+    IServiceProvider service)
   {
     _logger = logger;
     _queue = queue;
-    _repo = repo;
+    _service=service;
   }
 
   protected async override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -34,14 +35,16 @@ public class AccumulatorBackgroundService : BackgroundService
 
         _logger.LogInformation($"Processing Redirection for {redirect.Key}");
 
-        await _repo.InsertRedirect(redirect);
+        using var scope = _service.CreateScope();
+        var repo = scope.ServiceProvider.GetService<ILinkRepository>();
+        await repo.InsertRedirect(redirect);
 
       }
       catch (Exception ex)
       {
         _logger.LogError($"Failure while processing queue {ex}");
       }
-     }
+      }
   }
 
   public override async Task StopAsync(CancellationToken cancellationToken)

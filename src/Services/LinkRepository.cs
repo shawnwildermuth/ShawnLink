@@ -1,64 +1,39 @@
 ﻿using System.Collections.Generic;
 using Azure.Cosmos;
 using Azure.Cosmos.Serialization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ShawnLink.Data;
 
 namespace ShawnLink.Services;
 
 public class LinkRepository : ILinkRepository
 {
-  private const string DBNAME = "ShawnLinks";
-  private const string LINKCONTAINERNAME = "links";
-  private const string REDIRECTSCONTAINERNAME = "redirects";
   private readonly ShawnConfiguration _config;
   private readonly ILogger<LinkRepository> _logger;
-  private readonly IHostEnvironment _enviroment;
-  private CosmosClient _client;
-  private bool _dbInitialized = false;
+  private readonly LinkContext _ctx;
 
   public LinkRepository(ShawnConfiguration config,
     ILogger<LinkRepository> logger,
-    IHostEnvironment enviroment)
+    LinkContext ctx)
   {
     _config = config;
     _logger = logger;
-    _enviroment = enviroment;
-
-    var connString = _config.Storage.ConnectionString;
-    _client = new CosmosClient(_config.Storage.ConnectionString);
+    _ctx = ctx;
   }
 
   public async Task<IEnumerable<Link>> GetAllLinks()
   {
-    var container = await GetLinkContainer();
-    var query = new QueryDefinition($"SELECT * FROM c");
-
-    var results = new List<Link>();
-
-    var iterator = container.GetItemQueryIterator<Link>(query);
-    await foreach (Link result in iterator)
-    {
-      results.Add(result);
-    }
+    var results = await _ctx.Links.OrderBy(l => l.Key).ToListAsync();
 
     return results;
   }
 
   public async Task<IEnumerable<RedirectSummary>> GetRedirectSummaries()
   {
-    var container = await GetRedirectContainer();
-    var query = new QueryDefinition(
-      @"SELECT COUNT(i) as clickCount, i.key
-          FROM i
-         GROUP BY i.key");
-
-    var results = new List<RedirectSummary>();
-
-    var iterator = container.GetItemQueryIterator<RedirectSummary>(query);
-    await foreach (RedirectSummary result in iterator)
-    {
-      results.Add(result);
-    }
+    var results = await _ctx.Redirects.GroupBy(k => k.Key)
+      .Select(s => new RedirectSummary() { ClickCount = s.Count(), Key = s.Key })
+      .ToListAsync();
 
     return results;
 
@@ -66,94 +41,72 @@ public class LinkRepository : ILinkRepository
 
   public async Task<Link> GetLink(string key)
   {
-    var container = await GetLinkContainer();
 
-    var query = new QueryDefinition("SELECT * FROM c WHERE c.key = @key")
-      .WithParameter("@key", key);
+    var result = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).FirstOrDefaultAsync();
 
-    var iterator = container.GetItemQueryIterator<Link>(query);
+    if (result is null) return null;
 
-    var enumerator = iterator.GetAsyncEnumerator();
-
-    if (await enumerator.MoveNextAsync())
-    {
-      return enumerator.Current;
-    }
-    else
-    {
-      // Not Found
-      return null;
-    }
+    return result;
   }
 
 
   public async Task<Link> InsertLink(string key, string url)
   {
-    var container = await GetLinkContainer();
-    var newItem = await container.CreateItemAsync(new Link() { Key = key, Url = url });
-    return newItem.Value;
+    var exists = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).AnyAsync();
+    if (!exists)
+    {
+      var link = new Link() { Key = key, Url = url };
+      _ctx.Add(link);
+      if ((await _ctx.SaveChangesAsync()) > 0)
+      {
+        return link;
+      };
+    }
+
+    return null;
   }
 
 
   public async Task<Link> UpdateLink(string key, string url)
   {
-    var container = await GetLinkContainer();
-    var link = await GetLink(key);
-    if (link is null) return null;
-    link.Url = url;
-    var result = await container.UpsertItemAsync(link);
-    return result.Value;
+    var link = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).FirstOrDefaultAsync();
+    if (link is not null)
+    {
+      link.Url = url;
+      if ((await _ctx.SaveChangesAsync()) > 0)
+      {
+        return link;
+      };
+    }
+
+    return null;
   }
 
   public async Task<bool> DeleteLink(string key)
   {
-    var item = await GetLink(key);
-    if (item is null)
+    var link = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).FirstOrDefaultAsync();
+    if (link is not null)
     {
-      return false;
+      _ctx.Remove(link);
+      if ((await _ctx.SaveChangesAsync()) > 0)
+      {
+        return true;
+      };
     }
 
-    var container = await GetLinkContainer();
-    var result = await container.DeleteItemAsync<Link>(item.Id, new PartitionKey(item.Domain));
-    return true;
+    return false;
   }
 
   public async Task<Redirect> InsertRedirect(Redirect redirect)
   {
-    var container = await GetRedirectContainer();
-    var newItem = await container.CreateItemAsync(redirect);
-    return newItem.Value;
-  }
-
-  async Task<CosmosContainer> GetLinkContainer()
-  {
-    await InitializeDatabaseAsync();
-    return _client.GetContainer(DBNAME, LINKCONTAINERNAME);
-  }
-
-  async Task<CosmosContainer> GetRedirectContainer()
-  {
-    await InitializeDatabaseAsync();
-    return _client.GetContainer(DBNAME, REDIRECTSCONTAINERNAME);
-  }
-
-  async Task InitializeDatabaseAsync()
-  {
-    if (_enviroment.IsDevelopment() && !_dbInitialized)
+    _ctx.Redirects.Add(redirect);
+    if ((await _ctx.SaveChangesAsync()) > 0)
     {
-      var result = await _client
-        .CreateDatabaseIfNotExistsAsync(DBNAME);
-      await result.Database
-        .CreateContainerIfNotExistsAsync(
-          LINKCONTAINERNAME,
-          "/domain");
+      return redirect;
+    };
 
-      await result.Database.CreateContainerIfNotExistsAsync(
-          REDIRECTSCONTAINERNAME,
-          "/key");
-
-      _dbInitialized = true;
-    }
+    return null;
   }
+
 
 }
