@@ -2,6 +2,7 @@ using System.IO;
 using System.Text.Json;
 using idunno.Authentication.Basic;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
@@ -17,21 +18,16 @@ builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
   .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
 // Configure for inside of a container
-//if (builder.Environment.IsProduction())
-//{
-//  builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
-//  {
-//    options.Events = new OpenIdConnectEvents
-//    {
-//      OnRedirectToIdentityProvider = (context) =>
-//      {
-//        context.ProtocolMessage.RedirectUri = "https://shawnl.ink/signin-oidc";
-//        return Task.FromResult(0);
-//      }
-//    };
-//  });
-//}
-
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+  options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                ForwardedHeaders.XForwardedProto;
+  // Only loopback proxies are allowed by default.
+  // Clear that restriction because forwarders are enabled by explicit
+  // configuration.
+  options.KnownNetworks.Clear();
+  options.KnownProxies.Clear();
+});
 
 builder.Services.AddTransient<LinkManager>();
 builder.Services.AddMemoryCache();
@@ -58,6 +54,8 @@ if (args is not null && args.Count() == 1 && args[0] == "/seed")
   ctx.SaveChanges();
   return;
 }
+
+app.UseForwardedHeaders();
 
 if (app.Environment.IsDevelopment())
 {
