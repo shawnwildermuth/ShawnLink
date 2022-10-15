@@ -11,6 +11,9 @@
         <li class="nav-item">
           <router-link to="/summaries" class="nav-link">Reports</router-link>
         </li>
+        <li class="nav-item">
+          <a href="/signout-oidc">Logout</a>
+        </li>
       </ul>
     </nav>
     <div class="row">
