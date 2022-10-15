@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Azure.Cosmos;
-using Azure.Cosmos.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShawnLink.Data;

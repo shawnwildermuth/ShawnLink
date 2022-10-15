@@ -1,7 +1,9 @@
 using System.IO;
 using System.Text.Json;
 using idunno.Authentication.Basic;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Web;
 using ShawnLink.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +12,8 @@ var config = new ShawnConfiguration(builder.Configuration);
 
 builder.Services.AddSingleton(config);
 
-builder.Services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
-   .AddBasic(ConfigureBasicAuth);
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+  .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddTransient<LinkManager>();
 builder.Services.AddMemoryCache();
@@ -33,6 +35,7 @@ if (args is not null && args.Count() == 1 && args[0] == "/seed")
   var links = JsonSerializer.Deserialize<Link[]>(json, opt);
   using var scope = app.Services.CreateScope();
   var ctx = scope.ServiceProvider.GetService<LinkContext>();
+  ctx.Database.EnsureCreated();
   ctx.AddRange(links);
   ctx.SaveChanges();
   return;
@@ -63,40 +66,3 @@ app.Use(async (context, next) =>
 app.MapFallbackToController("Index", "Fallback");
 
 app.Run();
-
-
-void ConfigureBasicAuth(BasicAuthenticationOptions options)
-{
-  options.Realm = "shawnl.ink";
-  options.AllowInsecureProtocol = true;
-  options.Events = new BasicAuthenticationEvents
-  {
-    OnValidateCredentials = context =>
-    {
-      if (context.Username == config.Security.Username && context.Password == config.Security.Password)
-      {
-        var claims = new[]
-        {
-          new Claim(
-            ClaimTypes.NameIdentifier,
-            context.Username,
-            ClaimValueTypes.String,
-            context.Options.ClaimsIssuer),
-          new Claim(
-            ClaimTypes.Name,
-            context.Username,
-            ClaimValueTypes.String,
-            context.Options.ClaimsIssuer)
-        };
-
-        context.Principal = new ClaimsPrincipal(
-            new ClaimsIdentity(claims, context.Scheme.Name));
-
-        context.Success();
-      }
-
-      return Task.CompletedTask;
-    }
-  };
-  options.Validate();
-}
