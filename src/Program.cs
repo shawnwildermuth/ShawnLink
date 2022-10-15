@@ -3,6 +3,7 @@ using System.Text.Json;
 using idunno.Authentication.Basic;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
 using ShawnLink.Data;
 
@@ -14,6 +15,24 @@ builder.Services.AddSingleton(config);
 
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
   .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+
+// Configure for inside of a container
+builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+{
+  options.Events = new OpenIdConnectEvents
+  {
+
+    OnRedirectToIdentityProvider = (context) =>
+    {
+      if (context.Request.Headers.ContainsKey("X-Forwarded-Host"))
+      {
+        context.ProtocolMessage.RedirectUri = "https://" + context.Request.Headers["X-Forwarded-Host"] + builder.Configuration.GetSection("AzureAd").GetValue<String>("CallbackPath");
+      }
+      return Task.FromResult(0);
+    }
+  };
+});
+
 
 builder.Services.AddTransient<LinkManager>();
 builder.Services.AddMemoryCache();
