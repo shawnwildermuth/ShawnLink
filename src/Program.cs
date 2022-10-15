@@ -17,20 +17,20 @@ builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
   .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
 // Configure for inside of a container
-if (builder.Environment.IsProduction())
-{
-  builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
-  {
-    options.Events = new OpenIdConnectEvents
-    {
-      OnRedirectToIdentityProvider = (context) =>
-      {
-        context.ProtocolMessage.RedirectUri = "https://shawnl.ink/signin-oidc";
-        return Task.FromResult(0);
-      }
-    };
-  });
-}
+//if (builder.Environment.IsProduction())
+//{
+//  builder.Services.Configure<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme, options =>
+//  {
+//    options.Events = new OpenIdConnectEvents
+//    {
+//      OnRedirectToIdentityProvider = (context) =>
+//      {
+//        context.ProtocolMessage.RedirectUri = "https://shawnl.ink/signin-oidc";
+//        return Task.FromResult(0);
+//      }
+//    };
+//  });
+//}
 
 
 builder.Services.AddTransient<LinkManager>();
