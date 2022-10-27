@@ -36,6 +36,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ILinkRepository, LinkRepository>();
 builder.Services.AddHostedService<AccumulatorBackgroundService>();
 builder.Services.AddDbContext<LinkContext>();
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();

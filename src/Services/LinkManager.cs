@@ -13,19 +13,22 @@ namespace ShawnLink.Services
     private readonly IMemoryCache _cache;
     private readonly IAccumulatorQueue _queue;
     private readonly ILinkRepository _repo;
+    private readonly IHttpContextAccessor _contextAccessor;
 
     public LinkManager(ShawnConfiguration config,
       IWebHostEnvironment env,
       ILogger<LinkManager> logger,
       IMemoryCache cache,
       IAccumulatorQueue queue,
-      ILinkRepository repo)
+      ILinkRepository repo,
+      IHttpContextAccessor contextAccessor)
     {
       _env = env;
       _logger = logger;
       _cache = cache;
       _queue = queue;
       _repo = repo;
+      _contextAccessor = contextAccessor;
     }
 
     public async Task<IEnumerable<Link>> GetAll()
@@ -58,7 +61,7 @@ namespace ShawnLink.Services
     {
       try
       {
-        var (key, dest) = await FindRedirect(ctx.Request.Path);
+        var (key, dest, domain) = await FindRedirect(ctx.Request.Path);
         if (dest is not null)
         {
           ctx.Response.Redirect(dest);
@@ -70,7 +73,8 @@ namespace ShawnLink.Services
             Referer = ctx.Request.Headers.Referer.FirstOrDefault(),
             Origin = ctx.Request.Headers.Origin.FirstOrDefault(),
             QueryString = ctx.Request.QueryString.Value,
-            Time = DateTime.UtcNow
+            Time = DateTime.UtcNow,
+            Domain = domain
           });
 
           return true;
@@ -85,23 +89,25 @@ namespace ShawnLink.Services
 
     }
 
-    async Task<(string key, string dest)> FindRedirect(PathString path)
+    async Task<(string key, string dest, string domain)> FindRedirect(PathString path)
     {
       string redirectUrl = null;
       bool found = false;
+      string domain = _contextAccessor.HttpContext.Request.PathBase.Value!.ToLower();
+
 
       var key = path.Value.ToLower().Substring(1); // Remove leading slash
       if (!string.IsNullOrWhiteSpace(key))
       {
 
-        Dictionary<string, string> linkCache;
+        Dictionary<(string, string), string> linkCache;
 
-        if (_cache.TryGetValue<Dictionary<string, string>>(LINKCACHE, out linkCache))
+        if (_cache.TryGetValue<Dictionary<(string, string), string>>(LINKCACHE, out linkCache))
         {
-          if (linkCache.ContainsKey(key))
+          if (linkCache.ContainsKey((key, domain)))
           {
             _logger.LogInformation("Found key from cache");
-            redirectUrl = linkCache[key];
+            redirectUrl = linkCache[(key, domain)];
             found = true;
           }
         }
@@ -109,21 +115,41 @@ namespace ShawnLink.Services
         if (!found)
         {
           // Look it up
-          var link = await _repo.GetLink(key);
-          if (link != null)
+          var links = await _repo.GetLink(key, domain);
+          if (links.Any())
           {
-            if (linkCache is null) linkCache = new Dictionary<string, string>();
-            linkCache[key] = link.Url;
-            _cache.Set(LINKCACHE, linkCache, DateTimeOffset.Now.AddMinutes(60));
+            if (linkCache is null) linkCache = new Dictionary<(string, string), string>();
+            Link result = null;
+            if (links.Count() > 1)
+            {
+              foreach (var link in links)
+              {
+                if (domain.ToLower().Contains(link.Domain.ToLower()))
+                {
+                  result = link;
+                  break;
+                }
+              }
+            }
+            else
+            {
+              result = links.First();
+            }
 
-            _logger.LogInformation("Added Key to Cache");
+            if (result is not null)
+            {
+              linkCache[(key, domain)] = result.Url;
+              _cache.Set(LINKCACHE, linkCache, DateTimeOffset.Now.AddMinutes(60));
 
-            redirectUrl = link.Url;
+              _logger.LogInformation("Added Key to Cache");
+
+              redirectUrl = result.Url;
+            }
           }
         }
       }
 
-      return (key, redirectUrl);
+      return (key, redirectUrl, domain);
     }
   }
 }

@@ -14,8 +14,9 @@ public class Redirect
   public string Key { get; set; }
   public DateTime Time { get; set; }
   public string Comments { get; set; }
-  public string Referer { get; internal set; }
-  public string Origin { get; internal set; }
-  public string QueryString { get; internal set; }
-  public string Destination { get; internal set; }
+  public string Referer { get; set; }
+  public string Origin { get; set; }
+  public string QueryString { get; set; }
+  public string Destination { get; set; }
+  public string Domain { get; set; }
 }

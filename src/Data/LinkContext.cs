@@ -36,6 +36,7 @@ public class LinkContext : DbContext
     redirectBldr.Property(r => r.QueryString).HasMaxLength(255);
     redirectBldr.Property(r => r.Comments).HasMaxLength(1024);
     redirectBldr.Property(r => r.Destination).HasMaxLength(1024);
+    redirectBldr.Property(r => r.Domain).HasMaxLength(100);
   }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

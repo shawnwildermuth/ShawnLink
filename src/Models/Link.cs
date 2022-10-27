@@ -13,5 +13,5 @@ public class Link
   public Guid Id { get; set; } = Guid.NewGuid();
   public string Key { get; set; }
   public string Url { get; set; }
-  public string Domain { get; set; } = "shawnlink";
+  public string Domain { get; set; }
 }

@@ -37,12 +37,12 @@ public class LinkRepository : ILinkRepository
 
   }
 
-  public async Task<Link> GetLink(string key)
+  public async Task<IEnumerable<Link>> GetLink(string key, string domain)
   {
 
-    var result = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).FirstOrDefaultAsync();
-
-    if (result is null) return null;
+    var result = await _ctx.Links
+      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .ToArrayAsync();
 
     return result;
   }
