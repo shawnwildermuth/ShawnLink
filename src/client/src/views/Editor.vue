@@ -24,6 +24,18 @@
         />
       </div>
       <div class="form-group">
+        <label for="domain">Domain</label>
+        <select
+          id="domain"
+          class="form-control"
+          v-model="link.domain"
+          :disabled="!isNew"
+        >
+          <option disabled>Select One...</option>
+          <option v-for="d in domains" :key="d">{{ d }}</option>
+        </select>
+      </div>
+      <div class="form-group">
         <input type="submit" class="btn btn-success" value="Save" />
       </div>
     </form>
@@ -31,22 +43,25 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-import state from '@/state';
-import http from 'axios';
-import router from '@/router';
+import { onMounted, ref } from "vue";
+import state from "@/state";
+import http from "axios";
+import router from "@/router";
 
 export default {
   props: {
-    editKey: { required: false }
+    editKey: { required: false },
   },
   setup(props) {
     const link = ref({
-      key: ref(''),
-      url: ref('')
+      key: ref(""),
+      url: ref(""),
+      domain: ref("shawnl.ink"),
     });
 
-    const title = ref('New Shawn Link');
+    const domains = ref(["shawnl.ink", "imfinel.ink"]);
+
+    const title = ref("New Shawn Link");
     const isNew = ref(true);
 
     onMounted(() => {
@@ -54,7 +69,7 @@ export default {
         const found = state.links.value.find((l) => l.key === props.editKey);
         if (found) {
           isNew.value = false;
-          title.value = 'Editing Shawn Link';
+          title.value = "Editing Shawn Link";
           link.value.key = found.key;
           link.value.url = found.url;
         }
@@ -62,23 +77,23 @@ export default {
     });
 
     async function onSave() {
-      state.setBusy('Saving Link...');
+      state.setBusy("Saving Link...");
       state.clearError();
       try {
         if (isNew.value) {
           // add to the list
-          const result = await http.post('/api/links', link.value);
+          const result = await http.post("/api/links", link.value);
           state.links.value.push(result.data);
-          router.push('/');
+          router.push("/");
         } else {
           // update the Link
-          const result = await http.put('/api/links', link.value);
-          const loc = state.links.value.find(l => l.key === result.data.key);
+          const result = await http.put("/api/links", link.value);
+          const loc = state.links.value.find((l) => l.key === result.data.key);
           if (loc > 0) state.links.value.splice(loc, 1, state.data);
-          router.push('/');
+          router.push("/");
         }
       } catch {
-        state.setError('Could not save');
+        state.setError("Could not save");
       } finally {
         state.clearBusy();
       }
@@ -88,8 +103,9 @@ export default {
       onSave,
       link,
       title,
-      isNew
+      domains,
+      isNew,
     };
-  }
+  },
 };
 </script>

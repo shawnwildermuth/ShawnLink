@@ -70,7 +70,7 @@ namespace ShawnLink.Controllers
         _logger.LogError($"Failed to insert link: {ex}");
       }
 
-      return BadRequest("Failed to update");
+      return BadRequest("No Changes Detected...Couldn't Update");
     }
 
     [HttpDelete("{domain}/{key}")]

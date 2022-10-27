@@ -3,6 +3,7 @@ using System.Text.Json;
 using idunno.Authentication.Basic;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
@@ -70,7 +71,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute("Admin", "/admin", new { controller = "Admin", action = "Index" });
+app.MapControllerRoute("Admin",
+  "/admin",
+  new { controller = "Admin", action = "Index" });
 
 app.Use(async (context, next) =>
 {

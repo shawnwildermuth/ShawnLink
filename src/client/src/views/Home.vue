@@ -13,44 +13,52 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="l in links" :key="l">
-              <td>{{ l.key }}</td>
-              <td>
-                <a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a>
-              </td>
-              <td>
-                <a :href="l.url">https://shawnl.ink/{{ l.key }}</a>
-              </td>
-              <td>
-                <div class="btn-group" role="group">
-                  <router-link
-                    :to="{ name: 'EditLink', params: { editKey: l.key } }"
-                    type="button"
-                    class="btn btn-sm btn-info"
-                    >Edit</router-link
-                  >
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-info"
-                    @click="deleteLink(l)"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-info"
-                    @click="copyToClipboard(l)"
-                  >
-                    Copy
-                  </button>
-                </div>
-              </td>
-            </tr>
+            <template v-for="g in links" :key="g">
+              <tr>
+                <td colspan="6">Domain: <strong>{{ g.domain }}</strong></td>
+              </tr>
+              <tr v-for="l in g.links" :key="l">
+                <td>{{ l.key }}</td>
+                <td>
+                  <a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a>
+                </td>
+                <td>
+                  <a :href="l.url">https://shawnl.ink/{{ l.key }}</a>
+                </td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <router-link
+                      :to="{ name: 'EditLink', params: { editKey: l.key } }"
+                      type="button"
+                      class="btn btn-sm btn-info"
+                      >Edit</router-link
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-info"
+                      @click="deleteLink(l)"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-info"
+                      @click="copyToClipboard(l)"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+  <pre>
+    {{ links }}
+  </pre>
 </template>
 
 <script>

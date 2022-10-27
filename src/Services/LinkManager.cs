@@ -31,7 +31,7 @@ namespace ShawnLink.Services
       _contextAccessor = contextAccessor;
     }
 
-    public async Task<IEnumerable<Link>> GetAll()
+    public async Task<IEnumerable<LinkResult>> GetAll()
     {
 
       return await _repo.GetAllLinks();

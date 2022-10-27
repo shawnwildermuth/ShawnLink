@@ -11,7 +11,7 @@ const state = {
     this.clearError();
     try {
       var result = await http.get('/api/links');
-      this.links.value = result.data.sort((a,b) => a.key.localeCompare(b.key));
+      this.links.value = result.data;//.sort((a,b) => a.key.localeCompare(b.key));
       this.isLoaded.value = true;
     } catch (e) {
       console.error(e);

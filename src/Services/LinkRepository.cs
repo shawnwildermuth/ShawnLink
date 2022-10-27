@@ -20,10 +20,23 @@ public class LinkRepository : ILinkRepository
     _ctx = ctx;
   }
 
-  public async Task<IEnumerable<Link>> GetAllLinks()
+  public async Task<IEnumerable<LinkResult>> GetAllLinks()
   {
-    var results = await _ctx.Links.OrderBy(l => l.Key).ToListAsync();
+    var groups = await _ctx.Links
+      .OrderBy(l => l.Domain)
+      .ThenBy(l => l.Key)
+      .ToListAsync();
 
+    var results = new List<LinkResult>();
+
+    foreach (var g in groups.GroupBy(t => t.Domain).ToList())
+    {
+      results.Add(new LinkResult()
+      {
+        Domain = g.Key,
+        Links = g.ToList()
+      });
+    }
     return results;
   }
 
@@ -115,5 +128,10 @@ public class LinkRepository : ILinkRepository
     return null;
   }
 
+}
 
+public class LinkResult
+{
+  public string Domain { get; set; }
+  public IEnumerable<Link> Links { get; set; }
 }

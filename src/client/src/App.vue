@@ -12,7 +12,7 @@
           <router-link to="/summaries" class="nav-link">Reports</router-link>
         </li>
         <li class="nav-item">
-          <a href="/signout-oidc">Logout</a>
+          <a href="/signout-oidc" class="nav-link">Logout</a>
         </li>
       </ul>
     </nav>
