@@ -45,7 +45,7 @@ namespace ShawnLink.Controllers
     {
       try
       {
-        var result = await _linkManager.InsertLink(model.Key, model.Url);
+        var result = await _linkManager.InsertLink(model.Key, model.Url, model.Domain);
         if (result is null) return BadRequest("Duplicate Key");
         return Ok(result);
       }
@@ -62,7 +62,7 @@ namespace ShawnLink.Controllers
     {
       try
       {
-        var result = await _linkManager.UpdateLink(model.Key, model.Url);
+        var result = await _linkManager.UpdateLink(model.Key, model.Url, model.Domain);
         if (result is not null) return Ok(result);
       }
       catch (Exception ex)
@@ -73,12 +73,12 @@ namespace ShawnLink.Controllers
       return BadRequest("Failed to update");
     }
 
-    [HttpDelete("{key}")]
-    public async Task<ActionResult> Delete(string key)
+    [HttpDelete("{domain}/{key}")]
+    public async Task<ActionResult> Delete(string key, string domain)
     {
       try
       {
-        if (await _linkManager.DeleteLink(key))
+        if (await _linkManager.DeleteLink(key, domain))
         {
           return Ok();
         }

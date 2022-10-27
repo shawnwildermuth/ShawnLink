@@ -37,23 +37,26 @@ public class LinkRepository : ILinkRepository
 
   }
 
-  public async Task<IEnumerable<Link>> GetLink(string key, string domain)
+  public async Task<IEnumerable<Link>> GetLinks(string key)
   {
 
     var result = await _ctx.Links
-      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .Where(l => l.Key.ToLower() == key.ToLower())
       .ToArrayAsync();
 
     return result;
   }
 
 
-  public async Task<Link> InsertLink(string key, string url)
+  public async Task<Link> InsertLink(string key, string url, string domain)
   {
-    var exists = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).AnyAsync();
+    var exists = await _ctx.Links
+      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .AnyAsync();
+
     if (!exists)
     {
-      var link = new Link() { Key = key, Url = url };
+      var link = new Link() { Key = key, Url = url, Domain = domain };
       _ctx.Add(link);
       if ((await _ctx.SaveChangesAsync()) > 0)
       {
@@ -65,9 +68,12 @@ public class LinkRepository : ILinkRepository
   }
 
 
-  public async Task<Link> UpdateLink(string key, string url)
+  public async Task<Link> UpdateLink(string key, string url, string domain)
   {
-    var link = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).FirstOrDefaultAsync();
+    var link = await _ctx.Links
+      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .FirstOrDefaultAsync();
+
     if (link is not null)
     {
       link.Url = url;
@@ -80,9 +86,12 @@ public class LinkRepository : ILinkRepository
     return null;
   }
 
-  public async Task<bool> DeleteLink(string key)
+  public async Task<bool> DeleteLink(string key, string domain)
   {
-    var link = await _ctx.Links.Where(l => l.Key.ToLower() == key.ToLower()).FirstOrDefaultAsync();
+    var link = await _ctx.Links
+      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .FirstOrDefaultAsync();
+
     if (link is not null)
     {
       _ctx.Remove(link);

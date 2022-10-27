@@ -4,11 +4,12 @@ namespace ShawnLink.Services;
 
 public interface ILinkRepository
 {
-  Task<bool> DeleteLink(string key);
   Task<IEnumerable<Link>> GetAllLinks();
-  Task<IEnumerable<Link>> GetLink(string shortCode, string domain);
-  Task<Redirect> InsertRedirect(Redirect redirect);
-  Task<Link> InsertLink(string key, string url);
-  Task<Link> UpdateLink(string key, string url);
+  Task<IEnumerable<Link>> GetLinks(string shortCode);
   Task<IEnumerable<RedirectSummary>> GetRedirectSummaries();
+
+  Task<Redirect> InsertRedirect(Redirect redirect);
+  Task<Link> InsertLink(string key, string url, string domain);
+  Task<Link> UpdateLink(string key, string url, string domain);
+  Task<bool> DeleteLink(string key, string domain);
 }

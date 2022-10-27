@@ -1,7 +1,7 @@
 [
 	{
 		"url": "https://helloworldfilm.com",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "hwfilm",
 		"id": "6379c87c-38f2-4722-9a2a-7654bd5e2fa3",
 		"_rid": "HjwdAO+N9xQBAAAAAAAAAA==",
@@ -12,7 +12,7 @@
 	},
 	{
 		"url": "https://imfinefilm.com",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "imfine",
 		"id": "dd28ee31-5120-4d9e-bcf4-7a19328236b1",
 		"_rid": "HjwdAO+N9xQCAAAAAAAAAA==",
@@ -23,7 +23,7 @@
 	},
 	{
 		"url": "https://pluralsight.com/author/shawn-wildermuth",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "psauthor",
 		"id": "900edccc-9f57-4d12-90d9-1925b00e4965",
 		"_rid": "HjwdAO+N9xQDAAAAAAAAAA==",
@@ -34,7 +34,7 @@
 	},
 	{
 		"url": "https://youtu.be/SjR24_UOOzE",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "hwtrailer",
 		"id": "ada6105b-b28c-4e7a-949f-4084468c7225",
 		"_rid": "HjwdAO+N9xQEAAAAAAAAAA==",
@@ -45,7 +45,7 @@
 	},
 	{
 		"url": "https://courses.wilderminds.com/",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "courses",
 		"id": "e641d129-899c-41a1-8467-bebe51f0b9fe",
 		"_rid": "HjwdAO+N9xQFAAAAAAAAAA==",
@@ -56,7 +56,7 @@
 	},
 	{
 		"url": "https://pluralsight.com/courses/web-api-design",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "apicourse",
 		"id": "72822ca6-3d4f-4e12-8856-8b437c680820",
 		"_rid": "HjwdAO+N9xQGAAAAAAAAAA==",
@@ -67,7 +67,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/c/swildermuth",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "yt",
 		"id": "f5968354-15bf-4ec5-b2d8-3bf3ef0f52a2",
 		"_rid": "HjwdAO+N9xQHAAAAAAAAAA==",
@@ -78,7 +78,7 @@
 	},
 	{
 		"url": "https://wildermuth.com",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "blog",
 		"id": "58f968fc-78d0-443f-8004-885b9e28df41",
 		"_rid": "HjwdAO+N9xQIAAAAAAAAAA==",
@@ -89,7 +89,7 @@
 	},
 	{
 		"url": "https://helloworldfilm.com/dls/HWFilm-PressRelease.pdf",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "hw-pressrelease",
 		"id": "b74f69f0-48f4-43cc-a820-bd6573b3f64f",
 		"_rid": "HjwdAO+N9xQJAAAAAAAAAA==",
@@ -100,7 +100,7 @@
 	},
 	{
 		"url": "https://helloworldfilm.com/dls/HWFilm-OnePager.pdf",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "hw-onepager",
 		"id": "46e7b760-e580-484f-bf75-5a51dc8104f7",
 		"_rid": "HjwdAO+N9xQKAAAAAAAAAA==",
@@ -111,7 +111,7 @@
 	},
 	{
 		"url": "https://pluralsight.com/courses/bootstrap-grid-creating-responsive-layout",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "psbsgrid",
 		"id": "dc8063c3-1a54-4969-b5d6-fe737c7fc7ae",
 		"_rid": "HjwdAO+N9xQLAAAAAAAAAA==",
@@ -122,7 +122,7 @@
 	},
 	{
 		"url": "https://itunes.apple.com/us/movie/hello-world/id1538916434",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "preorder-hwfilm",
 		"id": "bb1c2e06-bf06-4a33-b324-c23b419145f2",
 		"_rid": "HjwdAO+N9xQMAAAAAAAAAA==",
@@ -133,7 +133,7 @@
 	},
 	{
 		"url": "https://pluralsight.com/courses/vue-building-forms",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "psvueforms",
 		"id": "eeaa5b8c-802d-4495-a019-b91600f95217",
 		"_rid": "HjwdAO+N9xQNAAAAAAAAAA==",
@@ -144,7 +144,7 @@
 	},
 	{
 		"url": "https://www.pluralsight.com/courses/aspnetcore-mvc-efcore-bootstrap-angular-web",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "pscore",
 		"id": "50f05277-8cf6-4110-be63-8450dcd51aff",
 		"_rid": "HjwdAO+N9xQOAAAAAAAAAA==",
@@ -155,7 +155,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12fVibsOjKw7chLqnK-FoBwO",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "bs4-free",
 		"id": "c6a91696-093d-4e37-8646-5c76428bb7f1",
 		"_rid": "HjwdAO+N9xQPAAAAAAAAAA==",
@@ -166,7 +166,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12c23GOhn-symlLFOLJfV94t",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "vue-free",
 		"id": "68d8a641-c4f2-46fc-9c7a-b4114bb182ae",
 		"_rid": "HjwdAO+N9xQQAAAAAAAAAA==",
@@ -177,7 +177,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12dzEfHNroS9QHoE3WefNCxh",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "signalr-free",
 		"id": "91e09ff1-ba3e-4271-a3d5-368543e300f5",
 		"_rid": "HjwdAO+N9xQRAAAAAAAAAA==",
@@ -188,7 +188,7 @@
 	},
 	{
 		"url": "https://youtu.be/RV0eHvs5ZYI",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "fa5-free",
 		"id": "073a487b-d9d8-4a27-b1f4-b202fcc7e711",
 		"_rid": "HjwdAO+N9xQSAAAAAAAAAA==",
@@ -199,7 +199,7 @@
 	},
 	{
 		"url": "https://app.milanote.com/1MummW1jllYU3S?p=bZ6KiEUON5q",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "view-imfine-board",
 		"id": "7ecebc0b-0c1a-4c58-899d-b858344eea7b",
 		"_rid": "HjwdAO+N9xQTAAAAAAAAAA==",
@@ -210,7 +210,7 @@
 	},
 	{
 		"url": "https://youtu.be/zK-_Lq8d1h8?t=303",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "dnf-f2f-recording-1",
 		"id": "a523cef8-ceec-4442-9ef3-5cf99d1c276b",
 		"_rid": "HjwdAO+N9xQUAAAAAAAAAA==",
@@ -221,7 +221,7 @@
 	},
 	{
 		"url": "https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "minimal-api-docs",
 		"id": "31da220e-e9ad-4284-94a1-7de5c30776cf",
 		"_rid": "HjwdAO+N9xQVAAAAAAAAAA==",
@@ -232,7 +232,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/watch?v=Q_zXFeP-QNI",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "yt-minimal-api",
 		"id": "3d588006-7b7e-4c7d-8bce-6974eda4d3b4",
 		"_rid": "HjwdAO+N9xQWAAAAAAAAAA==",
@@ -243,7 +243,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12fj4eLqBmjgCfdvsh2u3tN9",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "codingshorts",
 		"id": "4e3818e0-3b4a-4f5a-996d-4bab86cd9b04",
 		"_rid": "HjwdAO+N9xQXAAAAAAAAAA==",
@@ -254,7 +254,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12eDLwEdCwK-YrZXQ_vhJrHv",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "rants",
 		"id": "a4f01c9d-bea7-4c7b-a826-19c12537c515",
 		"_rid": "HjwdAO+N9xQYAAAAAAAAAA==",
@@ -265,7 +265,7 @@
 	},
 	{
 		"url": "https://www.seedandspark.com/fund/dontworry-imfine",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "imfine-fund",
 		"id": "4ccb61db-90f4-4473-a2af-2d6bfdc2bb23",
 		"_rid": "HjwdAO+N9xQZAAAAAAAAAA==",
@@ -276,7 +276,7 @@
 	},
 	{
 		"url": "https://www.seedandspark.com/fund/dontworry-imfine",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "fund-imfine",
 		"id": "60b11c15-a849-457e-9a49-464e470b4a1c",
 		"_rid": "HjwdAO+N9xQaAAAAAAAAAA==",
@@ -287,7 +287,7 @@
 	},
 	{
 		"url": "https://www.youtube.com/playlist?list=PLtOvnDRdH12eFFFW3M3mp_HHyT0WJoyHf",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "themaintainers",
 		"id": "64e6a4a9-f849-4d15-86a5-f7f395531ee7",
 		"_rid": "HjwdAO+N9xQbAAAAAAAAAA==",
@@ -298,7 +298,7 @@
 	},
 	{
 		"url": "https://github.com/bloomrpc/bloomrpc",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "bloomrpc",
 		"id": "b0cb9f00-0998-4510-a321-2d9351a4b9c0",
 		"_rid": "HjwdAO+N9xQcAAAAAAAAAA==",
@@ -309,7 +309,7 @@
 	},
 	{
 		"url": "https://developers.google.com/protocol-buffers/docs/reference/google.protobuf",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "protobuf-wellknown",
 		"id": "249617a5-f0bd-4e91-b176-20de24bb38fc",
 		"_rid": "HjwdAO+N9xQdAAAAAAAAAA==",
@@ -320,7 +320,7 @@
 	},
 	{
 		"url": "https://developers.google.com/protocol-buffers/docs/reference/proto3-spec",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "protobuf-spec",
 		"id": "05e4156f-f6a1-4ec0-a839-13fc1efea577",
 		"_rid": "HjwdAO+N9xQeAAAAAAAAAA==",
@@ -331,7 +331,7 @@
 	},
 	{
 		"url": "https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21#run-on-linux-macos",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "cosmosdb-on-mac",
 		"id": "322bbd93-11a1-4085-b0cf-05fd3bf029eb",
 		"_rid": "HjwdAO+N9xQfAAAAAAAAAA==",
@@ -342,7 +342,7 @@
 	},
 	{
 		"url": "https://docs.microsoft.com/en-us/azure/cosmos-db/partial-document-update-getting-started",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "cosmos-db-partialupdate",
 		"id": "db49e20c-78fb-4289-bf58-3db7105d39bf",
 		"_rid": "HjwdAO+N9xQgAAAAAAAAAA==",
@@ -353,7 +353,7 @@
 	},
 	{
 		"url": "https://www.amcharts.com/visited_states/#US-AL,US-AZ,US-CA,US-CO,US-FL,US-GA,US-ID,US-IL,US-IN,US-LA,US-MA,US-MD,US-MI,US-MO,US-MS,US-MT,US-NJ,US-NV,US-NY,US-OH,US-OR,US-PA,US-RI,US-TN,US-TX,US-UT,US-VT,US-WA,US-WY",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "ourstates",
 		"id": "7ed01db3-e9a8-4160-8e58-44915a246cda",
 		"_rid": "HjwdAO+N9xQhAAAAAAAAAA==",
@@ -364,7 +364,7 @@
 	},
 	{
 		"url": "https://www.amcharts.com/visited_countries/#AT,BE,BG,HR,CZ,FR,DE,GR,HU,IE,IT,NL,NO,PL,RO,ES,SE,CH,TR,GB,CA,US,AR,CL,FK,UY,ZA,CN,IN,IL,MY,NP,SG,TH,AU,NZ",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "ourcountries",
 		"id": "8b5992db-b284-4050-924c-c15a95affa35",
 		"_rid": "HjwdAO+N9xQiAAAAAAAAAA==",
@@ -375,7 +375,7 @@
 	},
 	{
 		"url": "https://kit.co/ShawnWildermuth/film-shooting-rig",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "mykit",
 		"id": "a6d503b5-d9b4-4f18-9fa3-d56218c2d60d",
 		"_rid": "HjwdAO+N9xQjAAAAAAAAAA==",
@@ -386,7 +386,7 @@
 	},
 	{
 		"url": "https://github.com/dotnet/roslyn/blob/main/docs/Language%20Feature%20Status.md",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "csharp-feature-status",
 		"id": "57792c5c-9a81-4b5d-aa43-2728c9cb5f86",
 		"_rid": "HjwdAO+N9xQkAAAAAAAAAA==",
@@ -397,7 +397,7 @@
 	},
 	{
 		"url": "https://pluralsight.com/courses/aspnet-web-api-building",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "pscoreapi",
 		"id": "e85eef95-1222-426b-ba21-f55293060790",
 		"_rid": "HjwdAO+N9xQlAAAAAAAAAA==",
@@ -408,7 +408,7 @@
 	},
 	{
 		"url": "https://ashy-meadow-03572a410.1.azurestaticapps.net",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "atldevcon",
 		"id": "746289d0-f6c8-4f96-baa6-43397f8b0cd1",
 		"_rid": "HjwdAO+N9xQmAAAAAAAAAA==",
@@ -419,7 +419,7 @@
 	},
 	{
 		"url": "https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "cosmosdb-emulator",
 		"id": "8ffc16c8-3dd1-4230-9631-9ee62ad888e1",
 		"_rid": "HjwdAO+N9xQnAAAAAAAAAA==",
@@ -430,7 +430,7 @@
 	},
 	{
 		"url": "https://nodejs.org/en/download/",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "install-node",
 		"id": "676099a6-d209-46b4-9463-76e0f3779525",
 		"_rid": "HjwdAO+N9xQoAAAAAAAAAA==",
@@ -441,7 +441,7 @@
 	},
 	{
 		"url": "https://www.typescriptlang.org/play",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "ts-playground",
 		"id": "94865b4b-c4b4-405b-b19f-d70a36fb06f9",
 		"_rid": "HjwdAO+N9xQpAAAAAAAAAA==",
@@ -452,7 +452,7 @@
 	},
 	{
 		"url": "https://devblogs.microsoft.com/typescript/a-proposal-for-type-syntax-in-javascript/",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"key": "ms-proposal-type-syntax",
 		"id": "49c23f47-398a-4b88-81a5-e856816513da",
 		"_rid": "HjwdAO+N9xQqAAAAAAAAAA==",
@@ -465,7 +465,7 @@
 		"id": "6e54152b-9dfa-4852-a46f-6047ac3a4f7c",
 		"key": "prioritygrid",
 		"url": "https://lemon-rock-0f3d0020f.1.azurestaticapps.net",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"_rid": "HjwdAO+N9xQrAAAAAAAAAA==",
 		"_self": "dbs/HjwdAA==/colls/HjwdAO+N9xQ=/docs/HjwdAO+N9xQrAAAAAAAAAA==/",
 		"_etag": "\"4e24ebcd-0000-0500-0000-627d19ad0000\"",
@@ -476,7 +476,7 @@
 		"id": "9f426620-ee00-44ac-a67f-f3d92fcdbe1b",
 		"key": "awathan-sep-concerns",
 		"url": "https://adamwathan.me/css-utility-classes-and-separation-of-concerns/",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"_rid": "HjwdAO+N9xQsAAAAAAAAAA==",
 		"_self": "dbs/HjwdAA==/colls/HjwdAO+N9xQ=/docs/HjwdAO+N9xQsAAAAAAAAAA==/",
 		"_etag": "\"532435e3-0000-0500-0000-6293abad0000\"",
@@ -487,7 +487,7 @@
 		"id": "faa0d4a7-5d47-4d04-b5a7-f14f6a3c34cf",
 		"key": "imfine-teaser",
 		"url": "https://vimeo.com/361977406",
-		"domain": "shawnlink",
+		"domain": "shawnl.ink",
 		"_rid": "HjwdAO+N9xQtAAAAAAAAAA==",
 		"_self": "dbs/HjwdAA==/colls/HjwdAO+N9xQ=/docs/HjwdAO+N9xQtAAAAAAAAAA==/",
 		"_etag": "\"5424a0c9-0000-0500-0000-629e794b0000\"",

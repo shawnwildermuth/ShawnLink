@@ -13,4 +13,6 @@ public class RedirectSummary
   public int ClickCount { get; set; }
   [JsonPropertyName("key")]
   public string Key { get; set; }
+  [JsonPropertyName("domain")]
+  public string Domain { get; set; }
 }

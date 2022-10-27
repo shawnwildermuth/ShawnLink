@@ -37,19 +37,19 @@ namespace ShawnLink.Services
       return await _repo.GetAllLinks();
     }
 
-    public async Task<Link> InsertLink(string key, string url)
+    public async Task<Link> InsertLink(string key, string url, string domain)
     {
-      return await _repo.InsertLink(key, url);
+      return await _repo.InsertLink(key, url, domain);
     }
 
-    public async Task<Link> UpdateLink(string key, string url)
+    public async Task<Link> UpdateLink(string key, string url, string domain)
     {
-      return await _repo.UpdateLink(key, url);
+      return await _repo.UpdateLink(key, url, domain);
     }
 
-    public async Task<bool> DeleteLink(string key)
+    public async Task<bool> DeleteLink(string key, string domain)
     {
-      return await _repo.DeleteLink(key);
+      return await _repo.DeleteLink(key, domain);
     }
 
     public void ClearCache()
@@ -93,8 +93,7 @@ namespace ShawnLink.Services
     {
       string redirectUrl = null;
       bool found = false;
-      string domain = _contextAccessor.HttpContext.Request.PathBase.Value!.ToLower();
-
+      string domain = _contextAccessor.HttpContext.Request.Host.Host.ToLower();
 
       var key = path.Value.ToLower().Substring(1); // Remove leading slash
       if (!string.IsNullOrWhiteSpace(key))
@@ -115,25 +114,18 @@ namespace ShawnLink.Services
         if (!found)
         {
           // Look it up
-          var links = await _repo.GetLink(key, domain);
+          var links = await _repo.GetLinks(key);
           if (links.Any())
           {
             if (linkCache is null) linkCache = new Dictionary<(string, string), string>();
             Link result = null;
-            if (links.Count() > 1)
+            foreach (var link in links)
             {
-              foreach (var link in links)
+              if (domain.ToLower().Contains(link.Domain.ToLower()) || domain.ToLower().Contains("localhost"))
               {
-                if (domain.ToLower().Contains(link.Domain.ToLower()))
-                {
-                  result = link;
-                  break;
-                }
+                result = link;
+                break;
               }
-            }
-            else
-            {
-              result = links.First();
             }
 
             if (result is not null)
