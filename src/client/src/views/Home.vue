@@ -6,6 +6,7 @@
         <table class="table table-sm table-bordered" v-cloak>
           <thead>
             <tr>
+              <th></th>
               <th>Key</th>
               <th>Destination</th>
               <th>Link</th>
@@ -18,6 +19,7 @@
                 <td colspan="6">Domain: <strong>{{ g.domain }}</strong></td>
               </tr>
               <tr v-for="l in g.links" :key="l">
+              <td>&nbsp;</td>
                 <td>{{ l.key }}</td>
                 <td>
                   <a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a>
@@ -57,7 +59,7 @@
     </div>
   </div>
   <pre>
-    {{ links }}
+    <!-- {{ links }} -->
   </pre>
 </template>
 
@@ -87,10 +89,14 @@ export default {
       state.setBusy("Deleting Links...");
       state.clearError();
       try {
-        const result = await http.delete(`/api/links/${link.key}`);
+        const result = await http.delete(`/api/links/${link.domain}/${link.key}`);
         if (result.status === 200) {
-          const loc = state.links.value.indexOf(link);
-          if (loc > -1) state.links.value.splice(loc, 1);
+          const domLoc = state.links.value.findIndex(d => d.domain);
+          if (domLoc < 0) throw "Bad Domain Group while deleting item";
+          const domain = state.links.value[domLoc];
+          const loc = domain.links.indexOf(link);
+          if (loc > -1) domain.links.splice(loc, 1);
+          if (domain.links.length === 0) state.links.value.splice(domLoc, 1);
         }
       } catch {
         state.setError(`Could not delete ${link.key}`);

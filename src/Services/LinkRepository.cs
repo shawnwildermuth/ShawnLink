@@ -42,8 +42,14 @@ public class LinkRepository : ILinkRepository
 
   public async Task<IEnumerable<RedirectSummary>> GetRedirectSummaries()
   {
-    var results = await _ctx.Redirects.GroupBy(k => k.Key)
-      .Select(s => new RedirectSummary() { ClickCount = s.Count(), Key = s.Key })
+    var results = await _ctx.Redirects.GroupBy(k => new { ShortCode = k.Key, k.Domain })
+      .Select(s => new RedirectSummary() 
+                   { 
+                     ClickCount = s.Count(), 
+                     Key = s.Key.ShortCode, 
+                     Domain = s.Key.Domain 
+                   })
+      .OrderBy(s => s.Key)
       .ToListAsync();
 
     return results;

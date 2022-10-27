@@ -26,12 +26,14 @@ export default defineComponent({
         <table class="table table-sm table-bordered" v-cloak>
           <thead>
             <tr>
+              <th>Domain</th>
               <th>Short Code</th>
               <th>Count</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in summaries" :key="item.key">
+              <td>{{ item.domain }}</td>
               <td>{{ item.key }}</td>
               <td>{{ item.clickCount }}</td>
             </tr>
