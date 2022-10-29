@@ -19,7 +19,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/editor/:editKey',
+    path: '/editor/:domain/:editKey',
     name: 'EditLink',
     component: Editor,
     props: true,

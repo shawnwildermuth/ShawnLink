@@ -25,12 +25,12 @@
                   <a :href="l.url" :title="l.url">{{ shorten(l.url) }}</a>
                 </td>
                 <td>
-                  <a :href="l.url">https://shawnl.ink/{{ l.key }}</a>
+                  <a :href="`https://${l.domain}/${l.key}`">{{ `https://${l.domain}/${l.key}` }}</a>
                 </td>
                 <td>
                   <div class="btn-group" role="group">
                     <router-link
-                      :to="{ name: 'EditLink', params: { editKey: l.key } }"
+                      :to="{ name: 'EditLink', params: { editKey: l.key, domain: l.domain } }"
                       type="button"
                       class="btn btn-sm btn-info"
                       >Edit</router-link
@@ -78,7 +78,7 @@ export default {
         state.setError("Failed to copy to clipboard: Not supported");
       } else {
         try {
-          await navigator.clipboard.writeText(`https://shawnl.ink/${link.key}`);
+          await navigator.clipboard.writeText(`https://${link.domain}/${link.key}`);
         } catch {
           state.setError("Failed to copy to clipboard: Exception thrown");
         }

@@ -51,6 +51,7 @@ import router from "@/router";
 export default {
   props: {
     editKey: { required: false },
+    domain: { required: false },
   },
   setup(props) {
     const link = ref({
@@ -66,13 +67,21 @@ export default {
 
     onMounted(() => {
       if (props.editKey) {
-        const found = state.links.value.find((l) => l.key === props.editKey);
-        if (found) {
-          isNew.value = false;
-          title.value = "Editing Shawn Link";
-          link.value.key = found.key;
-          link.value.url = found.url;
+        const collection = state.links.value.find(
+          (l) => l.domain === props.domain
+        );
+        if (collection) {
+          const found = collection.links.find((l) => l.key === props.editKey);
+          if (found) {
+            isNew.value = false;
+            title.value = "Editing Shawn Link";
+            link.value.key = found.key;
+            link.value.url = found.url;
+            link.value.domain = found.domain;
+            return;
+          }
         }
+        state.error.value = `Can't Find the Key: ${props.editKey}`;
       }
     });
 

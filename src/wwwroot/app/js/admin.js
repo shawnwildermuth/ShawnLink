@@ -41,6 +41,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     editKey: {
       required: false
+    },
+    domain: {
+      required: false
     }
   },
 
@@ -55,14 +58,22 @@ __webpack_require__.r(__webpack_exports__);
     const isNew = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(() => {
       if (props.editKey) {
-        const found = _state__WEBPACK_IMPORTED_MODULE_1__["default"].links.value.find(l => l.key === props.editKey);
+        const collection = _state__WEBPACK_IMPORTED_MODULE_1__["default"].links.value.find(l => l.domain === props.domain);
 
-        if (found) {
-          isNew.value = false;
-          title.value = "Editing Shawn Link";
-          link.value.key = found.key;
-          link.value.url = found.url;
+        if (collection) {
+          const found = collection.links.find(l => l.key === props.editKey);
+
+          if (found) {
+            isNew.value = false;
+            title.value = "Editing Shawn Link";
+            link.value.key = found.key;
+            link.value.url = found.url;
+            link.value.domain = found.domain;
+            return;
+          }
         }
+
+        _state__WEBPACK_IMPORTED_MODULE_1__["default"].error.value = `Can't Find the Key: ${props.editKey}`;
       }
     });
 
@@ -128,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
         _state__WEBPACK_IMPORTED_MODULE_0__["default"].setError("Failed to copy to clipboard: Not supported");
       } else {
         try {
-          await navigator.clipboard.writeText(`https://shawnl.ink/${link.key}`);
+          await navigator.clipboard.writeText(`https://${link.domain}/${link.key}`);
         } catch {
           _state__WEBPACK_IMPORTED_MODULE_0__["default"].setError("Failed to copy to clipboard: Exception thrown");
         }
@@ -504,14 +515,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.shorten(l.url)), 9
       /* TEXT, PROPS */
       , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-        href: l.url
-      }, "https://shawnl.ink/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(l.key), 9
+        href: `https://${l.domain}/${l.key}`
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(`https://${l.domain}/${l.key}`), 9
       /* TEXT, PROPS */
       , _hoisted_11)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: {
           name: 'EditLink',
           params: {
-            editKey: l.key
+            editKey: l.key,
+            domain: l.domain
           }
         },
         type: "button",
@@ -650,7 +662,7 @@ const routes = [{
   name: 'Home',
   component: _views_Home__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: '/editor/:editKey',
+  path: '/editor/:domain/:editKey',
   name: 'EditLink',
   component: _views_Editor__WEBPACK_IMPORTED_MODULE_1__["default"],
   props: true,

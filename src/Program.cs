@@ -2,6 +2,7 @@ using System.IO;
 using System.Text.Json;
 using idunno.Authentication.Basic;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,11 @@ builder.Services.AddSingleton(config);
 
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
   .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.Secure = CookieSecurePolicy.Always;
+});
 
 // Configure for inside of a container
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
@@ -66,6 +72,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
+app.UseCookiePolicy();
 app.UseRouting();
 
 app.UseAuthentication();
