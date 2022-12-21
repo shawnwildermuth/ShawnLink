@@ -15,15 +15,20 @@ urls.
 Couple of things to note:
 
 - I purposely avoided using MVC or any framework.
-- I wanted to use top-level statements to shorten the code
-- I wanted to play with Cosmos's Table Storage
+- I wanted to use top-level statements to shorten the code.
+- I wanted it to be aggresively cached to speed up the expansion.
+- Ended up using Azure SQL when Cosmos DB was too slow and too expensive.
+- Supports more than one domain.
+- I am using Azure AD just to only allow me to get to the admin pages and API. 
 
-Take a look. It's not perfect or production solid. But it 
-was fun. 
+Take a look. It's not perfect or production solid. But it was fun. 
 
 Here are a couple of shortened links:
 
-- https://shawnl.ist/hwfilm
-- https://shawnl.ist/courses
+- https://shawnl.ist/ps
+- https://shawnl.ist/yt
+- https://imfinel.ink/teaser 
 
-I explained what I was doing
+I explained what I was doing in a recent talk. 
+
+Feel free to fork and use it on your own. 
