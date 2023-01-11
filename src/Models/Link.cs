@@ -11,7 +11,10 @@ namespace ShawnLink.Models;
 public class Link
 {
   public Guid Id { get; set; } = Guid.NewGuid();
+  [Required]
   public string Key { get; set; }
+  [Required]
   public string Url { get; set; }
+  [Required]
   public string Domain { get; set; }
 }

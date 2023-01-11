@@ -1,44 +1,49 @@
 <template>
-  <div class="col-6 offset-3">
-    <h3>{{ title }}</h3>
-    <form novalidate @submit.prevent="onSave()">
-      <div class="form-group">
-        <label for="key">Key</label>
-        <input
-          type="text"
-          id="key"
-          class="form-control"
-          v-model="link.key"
-          placeholder="Unique Key"
-          :disabled="!isNew"
-        />
-      </div>
-      <div class="form-group">
-        <label for="url">Url</label>
-        <input
-          type="text"
-          id="url"
-          class="form-control"
-          v-model="link.url"
-          placeholder="https://..."
-        />
-      </div>
-      <div class="form-group">
-        <label for="domain">Domain</label>
-        <select
-          id="domain"
-          class="form-control"
-          v-model="link.domain"
-          :disabled="!isNew"
+  <div class="md:-w-1/2 mx-auto">
+    <h2>{{ title }}</h2>
+    <v-form
+      novalidate
+      @submit.prevent="onSave()"
+      v-model="valid"
+      class="-border -bg-gray-50 -p-1"
+    >
+      <v-text-field
+        id="key"
+        autofocus
+        class="form-control"
+        v-model="link.key"
+        placeholder="Unique Key"
+        :disabled="!isNew"
+        variant="solo"
+        label="Key"
+        :rules="[(v) => !!v || 'Key is required']"
+      />
+      <v-text-field
+        label="Url"
+        id="url"
+        class="form-control"
+        v-model="link.url"
+        variant="solo"
+        placeholder="https://..."
+        :rules="[(v) => !!v || 'Url is required']"
+      />
+      <v-combobox
+        label="Domain"
+        id="domain"
+        class="form-control"
+        v-model="link.domain"
+        variant="solo"
+        :disabled="!isNew"
+        :items="domains"
+      >
+      </v-combobox>
+      <div class="-py-1">
+        <v-btn type="submit" :disabled="!valid" color="success" class="-mr-1"
+          >Save</v-btn
         >
-          <option disabled>Select One...</option>
-          <option v-for="d in domains" :key="d">{{ d }}</option>
-        </select>
+        <v-btn to="/">cancel</v-btn>
       </div>
-      <div class="form-group">
-        <input type="submit" class="btn btn-success" value="Save" />
-      </div>
-    </form>
+    </v-form>
   </div>
 </template>
 
@@ -60,10 +65,10 @@ export default {
       domain: ref("shawnl.ink"),
     });
 
-    const domains = ref(["shawnl.ink", "imfinel.ink"]);
-
+    const domains = ref(["shawnl.ink", "imfinel.ink", "manenoughl.ink"]);
     const title = ref("New Shawn Link");
     const isNew = ref(true);
+    const valid = ref(false);
 
     onMounted(() => {
       if (props.editKey) {
@@ -96,13 +101,35 @@ export default {
           router.push("/");
         } else {
           // update the Link
-          const result = await http.put("/api/links", link.value);
-          const loc = state.links.value.find((l) => l.key === result.data.key);
-          if (loc > 0) state.links.value.splice(loc, 1, state.data);
-          router.push("/");
+          const collection = state.links.value.find(
+            (l) => l.domain === props.domain
+          );
+          if (collection) {
+            const loc = collection.links.findIndex((l) => l.key === props.editKey);
+            if (loc >= 0) {
+              const old = collection.links[loc];
+              if (
+                old.key != link.value.key ||
+                old.url != link.value.url ||
+                old.domain != link.value.domain
+              ) {
+                // It is changed
+                const result = await http.put("/api/links", link.value);
+                state.links.value.splice(loc, 1, result);
+              } else {
+                // since no change, just log that no change and return
+                console.log("No change");
+              }
+              router.push("/");
+            } else {
+              state.setError(`couldn't find key - internal error - ${old}`);
+            }
+          } else {
+            state.setError("Couldn't find the domain in the collection");
+          }
         }
-      } catch {
-        state.setError("Could not save");
+      } catch (e) {
+        state.setError(`Could not save: ${e}`);
       } finally {
         state.clearBusy();
       }
@@ -114,6 +141,7 @@ export default {
       title,
       domains,
       isNew,
+      valid,
     };
   },
 };

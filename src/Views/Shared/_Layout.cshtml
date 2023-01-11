@@ -1,17 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
   <title>Shawnl.ink</title>
-  <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="~/css/shawnlink.min.css" rel="stylesheet" asp-append-version="true" />
   @RenderSection("styles", false)
 </head>
+
 <body>
   @RenderBody()
-  <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
-  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script defer src="~/lib/fortawesome/fontawesome-free/js/solid.min.js"></script>
   <script src="~/lib/fortawesome/fontawesome-free/js/fontawesome.min.js"></script>
   @RenderSection("scripts", false)
 </body>
+
 </html>

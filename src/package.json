@@ -1,0 +1,13 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./shawnlink.css -o ./wwwroot/css/shawnlink.min.css -w",
+    "build": "npx tailwindcss -i ./shawnlink.css -o ./wwwroot/css/shawnlink.min.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

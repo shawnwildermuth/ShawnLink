@@ -1,29 +1,23 @@
 <template>
-  <div class="bg-white text-dark">
-    <nav class="navbar navbar-dark bg-dark">
-      <ul class="nav nav-pill">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">List</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/editor" class="nav-link">New</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/summaries" class="nav-link">Reports</router-link>
-        </li>
-        <li class="nav-item">
-          <a href="/signout-oidc" class="nav-link">Logout</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="row">
-      <div class="col-12">
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
-        <div class="alert alert-info" v-if="isBusy"><i class="fas fa-spin fa-spinner" /> {{ busyMessage }}</div>
-        <div class="row">
-          <div class="col-12">
-            <router-view />
-          </div>
+  <div class="bg-gray-50 text-gray-900 w-full">
+    <v-toolbar>
+      <v-toolbar-title>Admin</v-toolbar-title>
+      <v-toolbar-items>
+        <v-btn to="/">List</v-btn>
+        <v-btn to="/editor" class="button">New</v-btn>
+        <v-btn to="/summaries" class="button">Reports</v-btn>
+        <v-btn href="/">Test</v-btn>
+        <v-btn href="/signout-oidc" class="button">Logout</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <div class="">
+      <v-alert color="danger" v-if="error">{{ error }}</v-alert>
+      <v-alert color="info" v-if="isBusy"
+        ><i class="fas fa-spin fa-spinner" /> {{ busyMessage }}</v-alert
+      >
+      <div class="">
+        <div class="">
+          <router-view />
         </div>
       </div>
     </div>
@@ -31,13 +25,13 @@
 </template>
 
 <script>
-import state from '@/state';
+import state from "@/state";
 
 export default {
-  setup () {
+  setup() {
     return {
-      ...state
+      ...state,
     };
-  }
+  },
 };
 </script>

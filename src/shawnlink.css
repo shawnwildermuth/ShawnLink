@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  h1, h2, h3, h4 {
+    @apply -font-bold -mb-2 -mt-1;
+
+  }
+
+  h1 { @apply -text-3xl; }
+  h2 { @apply -text-2xl; }
+  h3 { @apply -text-xl; }
+  h4 { @apply -text-lg; }
+}

@@ -19,27 +19,21 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-12">
-      <h2>Usage Report</h2>
-      <div class="table-responsive">
-        <table class="table table-sm table-bordered" v-cloak>
-          <thead>
-            <tr>
-              <th>Domain</th>
-              <th>Short Code</th>
-              <th>Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in summaries" :key="item.key">
-              <td>{{ item.domain }}</td>
-              <td>{{ item.key }}</td>
-              <td>{{ item.clickCount }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <h2>Usage Report</h2>
+  <table class="-table-collapse -w-full" v-cloak>
+    <thead>
+      <tr>
+        <th>Domain</th>
+        <th>Short Code</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in summaries" :key="item.key"  class="hover:-bg-slate-100">
+        <td class="-border -border-gray-300 -p-1">{{ item.domain }}</td>
+        <td class="-border -border-gray-300 -p-1">{{ item.key }}</td>
+        <td class="-border -border-gray-300 -p-1">{{ item.clickCount }}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>

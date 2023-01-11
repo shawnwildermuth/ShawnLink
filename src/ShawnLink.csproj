@@ -38,4 +38,9 @@
     </None>
   </ItemGroup>
 
+  <!-- <Target Name="Postbuild" BeforeTargets="BeforePublish">
+    <Exec Command="npm install" />
+    <Exec Command="npm run build" />
+  </Target> -->
+
 </Project>
