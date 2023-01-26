@@ -14,6 +14,8 @@ namespace ShawnLink.Services
     private readonly IAccumulatorQueue _queue;
     private readonly ILinkRepository _repo;
     private readonly IHttpContextAccessor _contextAccessor;
+    private readonly Dictionary<string, string> _rawDomainMap = new Dictionary<string, string>();
+
 
     public LinkManager(ShawnConfiguration config,
       IWebHostEnvironment env,
@@ -29,6 +31,11 @@ namespace ShawnLink.Services
       _queue = queue;
       _repo = repo;
       _contextAccessor = contextAccessor;
+
+      _rawDomainMap.Add("hwfilm.com", "https://twainfilms.com/hwfilm");
+      _rawDomainMap.Add("imfinefilm.com", "https://twainfilms.com/manenough");
+      _rawDomainMap.Add("manenoughfilm.com", "https://twainfilms.com/manenough");
+      _rawDomainMap.Add("manenoughtoheal.com", "https://twainfilms.com/manenough");
     }
 
     public async Task<IEnumerable<LinkResult>> GetAll()
@@ -94,8 +101,15 @@ namespace ShawnLink.Services
       string redirectUrl = null;
       bool found = false;
       string domain = _contextAccessor.HttpContext.Request.Host.Host.ToLower();
-
       var key = path.Value.ToLower().Substring(1); // Remove leading slash
+
+      if (_rawDomainMap.ContainsKey(domain)) 
+      {
+        redirectUrl = _rawDomainMap[domain];
+      }
+      else
+      {
+
       if (!string.IsNullOrWhiteSpace(key))
       {
 
@@ -136,9 +150,10 @@ namespace ShawnLink.Services
               _logger.LogInformation("Added Key to Cache");
 
               redirectUrl = result.Url;
-            }
+            } 
           }
         }
+      }
       }
 
       return (key, redirectUrl, domain);

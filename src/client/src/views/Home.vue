@@ -1,5 +1,18 @@
 <template>
   <div>
+    <v-dialog v-model="showDialog" width="300" persistent>
+        <v-card>
+          <v-card-title> Are you Sure? </v-card-title>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="deleteConfirmation(true)"
+              >Yes</v-btn
+            >
+            <v-btn text @click="deleteConfirmation(false)">No</v-btn>
+          </v-card-actions>
+        </v-card>
+    </v-dialog>
     <h2>Links Management</h2>
     <table class="-table-collapse -w-full" v-cloak>
       <tbody>
@@ -56,13 +69,16 @@
 
 <script>
 import state from "@/state";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import http from "axios";
 
 export default {
   name: "Home",
   setup() {
     onMounted(() => state.loadLinks());
+
+    const showDialog = ref(false);
+    const linkToDelete = ref(null);
 
     async function copyToClipboard(link) {
       if (!navigator.clipboard) {
@@ -78,25 +94,37 @@ export default {
       }
     }
 
-    async function deleteLink(link) {
-      state.setBusy("Deleting Links...");
-      state.clearError();
-      try {
-        const result = await http.delete(
-          `/api/links/${link.domain}/${link.key}`
-        );
-        if (result.status === 200) {
-          const domLoc = state.links.value.findIndex((d) => d.domain);
-          if (domLoc < 0) throw "Bad Domain Group while deleting item";
-          const domain = state.links.value[domLoc];
-          const loc = domain.links.indexOf(link);
-          if (loc > -1) domain.links.splice(loc, 1);
-          if (domain.links.length === 0) state.links.value.splice(domLoc, 1);
+
+
+    function deleteLink(link) {
+      linkToDelete.value = link;
+      showDialog.value = true;
+    }
+
+    async function deleteConfirmation(agreed) {
+      showDialog.value = false;
+      const link = linkToDelete.value;
+      linkToDelete.value = null;
+      if (agreed) {
+        state.setBusy("Deleting Links...");
+        state.clearError();
+        try {
+          const result = await http.delete(
+            `/api/links/${link.domain}/${link.key}`
+          );
+          if (result.status === 200) {
+            const domLoc = state.links.value.findIndex((d) => d.domain);
+            if (domLoc < 0) throw "Bad Domain Group while deleting item";
+            const domain = state.links.value[domLoc];
+            const loc = domain.links.indexOf(link);
+            if (loc > -1) domain.links.splice(loc, 1);
+            if (domain.links.length === 0) state.links.value.splice(domLoc, 1);
+          }
+        } catch {
+          state.setError(`Could not delete ${link.key}`);
+        } finally {
+          state.clearBusy();
         }
-      } catch {
-        state.setError(`Could not delete ${link.key}`);
-      } finally {
-        state.clearBusy();
       }
     }
 
@@ -109,7 +137,9 @@ export default {
       links: state.links,
       copyToClipboard,
       deleteLink,
+      deleteConfirmation,
       shorten,
+      showDialog
     };
   },
 };
