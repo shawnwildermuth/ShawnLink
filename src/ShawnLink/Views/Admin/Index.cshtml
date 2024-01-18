@@ -1,0 +1,15 @@
+﻿<environment include="Development">
+  @section scripts {
+    <script type="module" src="http://localhost:5173/src/main.js"></script>
+  }
+</environment>
+<environment exclude="Development">
+  @section styles {
+    <link rel="stylesheet" href="~/app/css/chunk-vendors.css ">
+  }
+  @section scripts {
+  <script src="~/app/js/chunk-vendors.*.js"></script>
+  <script src="~/app/js/main.*.js"></script>
+  }
+</environment>
+<div id="admin"></div>
