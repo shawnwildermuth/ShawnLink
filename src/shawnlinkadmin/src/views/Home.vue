@@ -68,7 +68,7 @@ function shorten(val) {
 
 <template>
   <div>
-    <dialog ref="confirmationDialog" @close="closeDialog(false)" class="modal">
+    <dialog ref="confirmationDialog" @close="closeDialog(false)" class="modal" v-if="linkToDelete">
       <div class="modal-box w-72">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="closeDialog(false)">✕</button>
         <div class="text-lg font-bold"> Are you Sure? </div>
@@ -81,7 +81,7 @@ function shorten(val) {
       </div>
     </dialog>
     <div>
-      <h2>Links Management</h2>
+      <h2 class="text-xl font-bold">Links Management</h2>
       <table class="table overflow-x-auto" v-cloak>
         <tbody>
           <template v-for="g in state.links" :key="g">
@@ -107,20 +107,20 @@ function shorten(val) {
               </td>
               <td class="border border-gray-300 p-1">
                 <a :href="`https://${l.domain}/${l.key}`" target="_blank">{{
-                  `https://${l.domain}/${l.key}`
+                  `${l.domain}/${l.key}`
                 }}</a>
               </td>
               <td class="border border-gray-300 p-1">
-                <div class="grid gap-1 grid-cols-3">
-                  <button class="btn btn-primary btn-xs rounded-none" :to="{
+                <div class="join">
+                  <router-link class="join-item btn btn-primary btn-xs rounded-none" :to="{
                         name: 'EditLink',
                         params: { editKey: l.key, domain: l.domain },
-                      }">Edit</button>
-                  <button class="btn btn-error btn-xs  rounded-none"
+                      }">Edit</router-link>
+                  <button class="join-item btn btn-error btn-xs  rounded-none"
                     @click="deleteLink(l)">
                     Delete
                   </button>
-                  <button class="btn btn-warning btn-xs  rounded-none"
+                  <button class="join-item btn btn-warning btn-xs  rounded-none"
                     @click="copyToClipboard(l)">
                     Copy
                   </button>

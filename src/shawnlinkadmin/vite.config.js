@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
   ],
   build: {
-    outDir: "../ShawhLink/wwwroot/app/"
+    outDir: "../ShawnLink/wwwroot/app/"
   },
   resolve: {
     alias: {

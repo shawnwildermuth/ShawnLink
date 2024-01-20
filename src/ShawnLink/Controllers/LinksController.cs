@@ -12,7 +12,7 @@ namespace ShawnLink.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  //[Authorize]
+  [Authorize]
   public class LinksController : ControllerBase
   {
     private readonly ILogger<LinksController> _logger;

@@ -5,7 +5,7 @@
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000/admin",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "__"
       },
       "hotReloadEnabled": true,
       "applicationUrl": "http://localhost:5000"

@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.Json;
+using dotenv.net;
 using idunno.Authentication.Basic;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Identity.Web;
 using ShawnLink.Data;
+
+DotEnv.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 

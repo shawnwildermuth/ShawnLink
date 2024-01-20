@@ -5,11 +5,10 @@
 </environment>
 <environment exclude="Development">
   @section styles {
-    <link rel="stylesheet" href="~/app/css/chunk-vendors.css ">
+    <link rel="stylesheet" asp-href-include="~/app/assets/index-*.css ">
   }
   @section scripts {
-  <script src="~/app/js/chunk-vendors.*.js"></script>
-  <script src="~/app/js/main.*.js"></script>
+  <script asp-src-include="~/app/assets/index-*.js"></script>
   }
 </environment>
 <div id="admin"></div>

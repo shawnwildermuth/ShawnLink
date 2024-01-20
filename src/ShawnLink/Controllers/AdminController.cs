@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ShawnLink.Controllers
 {
-  //[Authorize]
+  [Authorize]
   public class AdminController : Controller
   {
     public AdminController()
