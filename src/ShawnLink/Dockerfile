@@ -16,4 +16,4 @@ RUN dotnet publish "ShawnLink.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ShawnLink.dll"]
+ENTRYPOINT ["dotnet", "ShawnLink.dll", "--urls=http://+:80"]
