@@ -23,9 +23,9 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Building Docker Image
-        working-directory: ./src
+        working-directory: ./src/ShawnLink
         run: docker build . -t wmcontainers.azurecr.io/shawnlink:latest
 
       - name: Push the Image
-        working-directory: ./src 
+        working-directory: ./src/ShawnLink
         run: docker push wmcontainers.azurecr.io/shawnlink:latest
