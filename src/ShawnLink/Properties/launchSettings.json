@@ -1,0 +1,20 @@
+{
+  "profiles": {
+    "shawnlink": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000/admin",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "__"
+      },
+      "hotReloadEnabled": true,
+      "applicationUrl": "http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 9000
+    }
+  }
+}

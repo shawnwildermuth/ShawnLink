@@ -1,9 +1,10 @@
-name: Build
+name: Build Project
 
 on: 
   push:
     branches:
-      next
+      - next
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.201
+        dotnet-version: 8.0.x
     - name: Build Project
       working-directory: ./src      
       run: dotnet build --configuration Release

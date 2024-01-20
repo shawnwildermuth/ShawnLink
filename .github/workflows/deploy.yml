@@ -4,18 +4,19 @@ on:
   push:
     branches:
       - main 
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-and-docker:
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.201
+          dotnet-version: 8.0.x
       - uses: azure/docker-login@v1
         with:
           login-server: wmcontainers.azurecr.io
@@ -23,9 +24,9 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Building Docker Image
-        working-directory: ./src
+        working-directory: ./src/ShawnLink
         run: docker build . -t wmcontainers.azurecr.io/shawnlink:latest
 
       - name: Push the Image
-        working-directory: ./src 
+        working-directory: ./src/ShawnLink
         run: docker push wmcontainers.azurecr.io/shawnlink:latest
