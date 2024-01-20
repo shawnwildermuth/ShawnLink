@@ -289,3 +289,4 @@ __pycache__/
 
 secrets.env
 /src/ShawnLink/.env
+node_modules/
