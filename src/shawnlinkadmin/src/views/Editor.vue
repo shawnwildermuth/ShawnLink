@@ -79,7 +79,7 @@ async function onSave() {
             old.domain != link.domain
           ) {
             // It is changed
-            const result = await http.put("/api/links", link.value, {
+            const result = await http.put("/api/links", link, {
               headers: {
                 "Content-Type": "application/json"
               }
