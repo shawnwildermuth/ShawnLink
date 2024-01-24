@@ -57,7 +57,11 @@ async function onSave() {
   try {
     if (isNew.value) {
       // add to the list
-      const result = await http.post("/api/links", link);
+      const result = await http.post("/api/links", link, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
       state.links.push(result.data);
       router.push("/");
     } else {
@@ -75,7 +79,11 @@ async function onSave() {
             old.domain != link.domain
           ) {
             // It is changed
-            const result = await http.put("/api/links", link.value);
+            const result = await http.put("/api/links", link.value, {
+              headers: {
+                "Content-Type": "application/json"
+              }
+            });
             state.links.splice(loc, 1, result);
           } else {
             // since no change, just log that no change and return
@@ -147,7 +155,8 @@ function validate(e) {
           <option v-for="d in domains">{{ d }}</option>
         </select>
         <div class="label" v-if="errors && errors.domain">
-          <div class="label-text text-error" v-for="e in errors.domain._errors">{{ e
+          <div class="label-text text-error" v-for="e in errors.domain._errors">{{
+            e
           }}</div>
         </div>
       </div>
