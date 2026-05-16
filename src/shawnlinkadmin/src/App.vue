@@ -6,23 +6,32 @@ const state = useState();
 
 <template>
   <div data-theme="business">
-    <div class="alert alert-error" v-if="state.error" @click="state.error = ''">{{
-      state.error }}</div>
-    <div class="alert" v-if="state.isBusy">
-      <span class="loading loading-ring loading-lg"></span> {{ state.busyMessage
-      }}
+    <div class="toast toast-top toast-end z-50" v-if="state.error">
+      <div class="alert alert-error cursor-pointer shadow-lg" @click="state.error = ''">
+        <span>{{ state.error }}</span>
+        <span class="text-xs opacity-70">(click to dismiss)</span>
+      </div>
     </div>
-    <div class="navbar bg-neutral">
-      <div class="font-bold text-lg flex-1"><a href="/admin">Admin</a></div>
-      <ul class="menu menu-horizontal">
-        <li><router-link to="/">List</router-link></li>
-        <li><router-link to="/editor">New</router-link></li>
-        <li><router-link to="/summaries">Reports</router-link></li>
-        <li><a href="/signout-oidc">Logout</a></li>
+    <div class="toast toast-top toast-start z-50" v-if="state.isBusy">
+      <div class="alert alert-info shadow-lg">
+        <span class="loading loading-spinner loading-sm"></span>
+        <span>{{ state.busyMessage }}</span>
+      </div>
+    </div>
+    <div class="navbar bg-neutral shadow-md px-4">
+      <div class="flex-1 flex items-center gap-2">
+        <a href="/admin" class="text-xl font-extrabold tracking-wide text-accent">🔗 ShawnLink</a>
+        <span class="badge badge-outline badge-sm text-base-content opacity-60">Admin</span>
+      </div>
+      <ul class="menu menu-horizontal gap-1">
+        <li><router-link to="/" class="rounded-btn">List</router-link></li>
+        <li><router-link to="/editor" class="rounded-btn">New</router-link></li>
+        <li><router-link to="/summaries" class="rounded-btn">Reports</router-link></li>
+        <li><a href="/signout-oidc" class="rounded-btn opacity-70 hover:opacity-100">Logout</a></li>
       </ul>
     </div>
-    <div>
-      <div class="p-1 bg-base-100">
+    <div class="bg-base-100 min-h-screen">
+      <div class="max-w-6xl mx-auto p-6">
         <router-view />
       </div>
     </div>
