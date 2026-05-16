@@ -69,72 +69,67 @@ function shorten(val) {
 <template>
   <div>
     <dialog ref="confirmationDialog" @close="closeDialog(false)" class="modal" v-if="linkToDelete">
-      <div class="modal-box w-72">
+      <div class="modal-box w-80">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click="closeDialog(false)">✕</button>
-        <div class="text-lg font-bold"> Are you Sure? </div>
-        <p class="my-2">Do you want to delete: {{ linkToDelete.key }}</p>
-        <div class="modal-actions">
-          <button class="btn btn-sm btn-primary"
-            @click="closeDialog(true)">Yes</button>
-          <button class="btn btn-sm btn-ghost" @click="closeDialog(false)">No</button>
+        <h3 class="text-lg font-bold text-error mb-1">Confirm Delete</h3>
+        <p class="my-3 text-base-content">Are you sure you want to delete <span class="font-mono font-bold text-accent">{{ linkToDelete.key }}</span>?</p>
+        <div class="modal-action">
+          <button class="btn btn-error btn-sm" @click="closeDialog(true)">Yes, Delete</button>
+          <button class="btn btn-ghost btn-sm" @click="closeDialog(false)">Cancel</button>
         </div>
       </div>
+      <form method="dialog" class="modal-backdrop"><button>close</button></form>
     </dialog>
-    <div>
-      <h2 class="text-xl font-bold">Links Management</h2>
-      <table class="table overflow-x-auto" v-cloak>
-        <tbody>
-          <template v-for="g in state.links" :key="g">
-            <tr>
-              <td colspan="6" class="bg-slate-800 text-white -p-1">
-                Domain: <strong>{{ g.domain }}</strong>
-              </td>
-            </tr>
-            <tr>
-              <th></th>
-              <th>Key</th>
-              <th>Destination</th>
-              <th>Link</th>
-              <th class="w-36"></th>
-            </tr>
-            <tr v-for="l in g.links" :key="l" class="hover">
-              <td>&nbsp;</td>
-              <td class="border border-gray-300 p-0.5 text-nowrap">{{ l.key }}
-              </td>
-              <td class="border border-gray-300 p-0.5">
-                <a :href="l.url" :title="l.url" target="_blank">{{ shorten(l.url)
-                }}</a>
-              </td>
-              <td class="border border-gray-300 p-1">
-                <a :href="`https://${l.domain}/${l.key}`" target="_blank">{{
-                  `${l.domain}/${l.key}`
-                }}</a>
-              </td>
-              <td class="border border-gray-300 p-1">
-                <div class="join">
-                  <router-link class="join-item btn btn-primary btn-xs rounded-none" :to="{
-                        name: 'EditLink',
-                        params: { editKey: l.key, domain: l.domain },
-                      }">Edit</router-link>
-                  <button class="join-item btn btn-error btn-xs  rounded-none"
-                    @click="deleteLink(l)">
-                    Delete
-                  </button>
-                  <button class="join-item btn btn-warning btn-xs  rounded-none"
-                    @click="copyToClipboard(l)">
-                    Copy
-                  </button>
 
-                </div>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-bold">Links Management</h2>
+      <router-link to="/editor" class="btn btn-primary btn-sm">+ New Link</router-link>
+    </div>
+
+    <div class="card bg-base-200 shadow-md">
+      <div class="card-body p-0 overflow-x-auto">
+        <table class="table table-zebra w-full" v-cloak>
+          <tbody>
+            <template v-for="g in state.links" :key="g">
+              <tr>
+                <td colspan="5" class="bg-neutral text-neutral-content font-semibold text-sm py-2 px-4">
+                  🌐 {{ g.domain }}
+                </td>
+              </tr>
+              <tr class="bg-base-300 text-base-content text-xs uppercase tracking-wide">
+                <th class="w-4"></th>
+                <th>Key</th>
+                <th>Destination</th>
+                <th>Short Link</th>
+                <th class="w-44 text-right">Actions</th>
+              </tr>
+              <tr v-for="l in g.links" :key="l" class="hover">
+                <td></td>
+                <td class="font-mono text-sm text-nowrap">{{ l.key }}</td>
+                <td class="text-sm max-w-xs truncate">
+                  <a :href="l.url" :title="l.url" target="_blank" class="link link-hover">{{ shorten(l.url) }}</a>
+                </td>
+                <td class="text-sm">
+                  <a :href="`https://${l.domain}/${l.key}`" target="_blank" class="link link-accent link-hover">
+                    {{ `${l.domain}/${l.key}` }}
+                  </a>
+                </td>
+                <td class="text-right">
+                  <div class="join">
+                    <router-link class="join-item btn btn-primary btn-xs" :to="{
+                          name: 'EditLink',
+                          params: { editKey: l.key, domain: l.domain },
+                        }">Edit</router-link>
+                    <button class="join-item btn btn-error btn-xs" @click="deleteLink(l)">Delete</button>
+                    <button class="join-item btn btn-warning btn-xs" @click="copyToClipboard(l)">Copy</button>
+                  </div>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  <!-- <pre>
-  {{ state.links }}
-  </pre> -->
 </template>
 

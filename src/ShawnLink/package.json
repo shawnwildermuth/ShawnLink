@@ -4,10 +4,14 @@
   "description": "",
   "main": "tailwind.config.js",
   "scripts": {
-    "watch": "npx tailwindcss -i ./shawnlink.css -o ./wwwroot/css/shawnlink.min.css -w",
-    "build": "npx tailwindcss -i ./shawnlink.css -o ./wwwroot/css/shawnlink.min.css --minify"
+    "watch": "tailwindcss -i ./shawnlink.css -o ./wwwroot/css/shawnlink.min.css -w",
+    "build": "tailwindcss -i ./shawnlink.css -o ./wwwroot/css/shawnlink.min.css --minify"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
+  }
 }
