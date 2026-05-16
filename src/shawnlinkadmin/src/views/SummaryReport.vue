@@ -47,26 +47,38 @@ function indicator(prop) {
 </script>
 
 <template>
-  <h2>Usage Report</h2>
-  <table class="table table-zebra" v-cloak>
-    <thead>
-      <tr>
-        <th class="cursor-pointer" @click="sort('domain')"
-          :class="{ 'text-white': currentSort === 'domain' }">
-          Domain {{ indicator('domain') }}
-        </th>
-        <th class="cursor-pointer" @click="sort('key')"
-          :class="{ 'text-white': currentSort === 'key' }">Short Code {{ indicator('key') }}</th>
-        <th class="cursor-pointer" @click="sort('clickCount')"
-          :class="{ 'text-white': currentSort === 'clickCount' }">Count {{ indicator('clickCount') }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in summaries" :key="item.key" class="hover">
-        <td>{{ item.domain }}</td>
-        <td>{{ item.key }}</td>
-        <td>{{ item.clickCount }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <h2 class="text-2xl font-bold mb-4">Usage Report</h2>
+    <div class="card bg-base-200 shadow-md">
+      <div class="card-body p-0 overflow-x-auto">
+        <table class="table table-zebra w-full" v-cloak>
+          <thead>
+            <tr class="bg-base-300 text-base-content text-sm">
+              <th class="cursor-pointer select-none" @click="sort('domain')"
+                :class="{ 'text-accent': currentSort === 'domain' }">
+                Domain {{ indicator('domain') }}
+              </th>
+              <th class="cursor-pointer select-none" @click="sort('key')"
+                :class="{ 'text-accent': currentSort === 'key' }">
+                Short Code {{ indicator('key') }}
+              </th>
+              <th class="cursor-pointer select-none text-right" @click="sort('clickCount')"
+                :class="{ 'text-accent': currentSort === 'clickCount' }">
+                Count {{ indicator('clickCount') }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in summaries" :key="item.key" class="hover">
+              <td class="text-sm">{{ item.domain }}</td>
+              <td class="font-mono text-sm">{{ item.key }}</td>
+              <td class="text-right">
+                <span class="badge badge-accent badge-sm">{{ item.clickCount }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </template>

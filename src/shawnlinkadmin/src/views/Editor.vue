@@ -119,56 +119,52 @@ function validate(e) {
 </script>
 
 <template>
-  <div class="md:w-1/2 mx-auto">
-    <h2 class="text-xl font-bold">{{ title }}</h2>
-    <form novalidate @submit.prevent="onSave()"
-      class="bg-neutral border-base-300 p-1">
+  <div class="md:w-2/3 lg:w-1/2 mx-auto">
+    <h2 class="text-2xl font-bold mb-4">{{ title }}</h2>
+    <div class="card bg-base-200 shadow-md">
+      <div class="card-body">
+    <form novalidate @submit.prevent="onSave()" class="flex flex-col gap-4">
       <div class="form-control">
-        <div class="label">
-          <span class="label-text">Key</span>
-        </div>
+        <label class="label">
+          <span class="label-text font-semibold">Key</span>
+        </label>
         <input class="input input-bordered" @keyup="validate" autofocus
           v-model="link.key" placeholder="Unique Key" :disabled="!isNew" />
         <div class="label" v-if="errors && errors.key">
-          <div class="label-text text-error" v-for="e in errors.key._errors">{{ e
-          }}</div>
+          <span class="label-text-alt text-error" v-for="e in errors.key._errors">{{ e }}</span>
         </div>
       </div>
       <div class="form-control">
-        <div class="label">
-          Url
-        </div>
+        <label class="label">
+          <span class="label-text font-semibold">URL</span>
+        </label>
         <input class="input input-bordered" v-model="link.url" @keyup="validate"
           placeholder="https://..." />
         <div class="label" v-if="errors && errors.url">
-          <div class="label-text text-error" v-for="e in errors.url._errors">{{ e
-          }}</div>
+          <span class="label-text-alt text-error" v-for="e in errors.url._errors">{{ e }}</span>
         </div>
       </div>
       <div class="form-control">
-        <div class="label">
-          Domain
-        </div>
-        <select label="Domain" class="select" v-model="link.domain"
-          @change="validate" :disabled="!isNew" :items="domains">
+        <label class="label">
+          <span class="label-text font-semibold">Domain</span>
+        </label>
+        <select class="select select-bordered" v-model="link.domain"
+          @change="validate" :disabled="!isNew">
           <option default disabled>Pick One</option>
           <option v-for="d in domains">{{ d }}</option>
         </select>
         <div class="label" v-if="errors && errors.domain">
-          <div class="label-text text-error" v-for="e in errors.domain._errors">{{
-            e
-          }}</div>
+          <span class="label-text-alt text-error" v-for="e in errors.domain._errors">{{ e }}</span>
         </div>
       </div>
-      <div class="py-1 flex justify-end">
-        <button type="submit" :disabled="!valid"
-          class="btn btn-success">Save</button>
-        <router-link to="/" class="btn btn-neutral">Cancel</router-link>
+      <div class="flex justify-end gap-2 pt-2">
+        <router-link to="/" class="btn btn-ghost">Cancel</router-link>
+        <button type="submit" :disabled="!valid" class="btn btn-success">Save</button>
       </div>
     </form>
+      </div>
+    </div>
   </div>
-  <pre>{{ errors }}</pre>
-  <pre>{{ link }}</pre>
 </template>
 
 <style scoped>
