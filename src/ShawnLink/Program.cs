@@ -59,9 +59,9 @@ if (args is not null && args.Count() == 1 && args[0] == "/seed")
   opt.PropertyNameCaseInsensitive = true;
   var links = JsonSerializer.Deserialize<Link[]>(json, opt);
   using var scope = app.Services.CreateScope();
-  var ctx = scope.ServiceProvider.GetService<LinkContext>();
+  var ctx = scope.ServiceProvider.GetRequiredService<LinkContext>();
   ctx.Database.EnsureCreated();
-  ctx.AddRange(links);
+  ctx.AddRange(links!);
   ctx.SaveChanges();
   return;
 }
@@ -88,7 +88,7 @@ app.MapControllerRoute("Admin",
 app.Use(async (context, next) =>
 {
   using var scope = app.Services.CreateScope();
-  var manager = scope.ServiceProvider.GetService<LinkManager>();
+  var manager = scope.ServiceProvider.GetRequiredService<LinkManager>();
   if (!await manager.HandleRedirection(context)) await next();
 });
 

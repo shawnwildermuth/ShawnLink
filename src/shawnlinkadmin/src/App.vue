@@ -6,13 +6,13 @@ const state = useState();
 
 <template>
   <div data-theme="business">
-    <div class="toast toast-top toast-end z-50" v-if="state.error">
+    <div class="toast toast-bottom toast-end z-50" v-if="state.error">
       <div class="alert alert-error cursor-pointer shadow-lg" @click="state.error = ''">
         <span>{{ state.error }}</span>
         <span class="text-xs opacity-70">(click to dismiss)</span>
       </div>
     </div>
-    <div class="toast toast-top toast-start z-50" v-if="state.isBusy">
+    <div class="toast toast-bottom toast-start z-50" v-if="state.isBusy">
       <div class="alert alert-info shadow-lg">
         <span class="loading loading-spinner loading-sm"></span>
         <span>{{ state.busyMessage }}</span>

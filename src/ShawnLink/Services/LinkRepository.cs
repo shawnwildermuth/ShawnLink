@@ -33,7 +33,7 @@ public class LinkRepository : ILinkRepository
     {
       results.Add(new LinkResult()
       {
-        Domain = g.Key,
+        Domain = g.Key ?? "",
         Links = g.ToList()
       });
     }
@@ -60,17 +60,17 @@ public class LinkRepository : ILinkRepository
   {
 
     var result = await _ctx.Links
-      .Where(l => l.Key.ToLower() == key.ToLower())
+      .Where(l => l.Key!.ToLower() == key.ToLower())
       .ToArrayAsync();
 
     return result;
   }
 
 
-  public async Task<Link> InsertLink(string key, string url, string domain)
+  public async Task<Link?> InsertLink(string? key, string? url, string? domain)
   {
     var exists = await _ctx.Links
-      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .Where(l => l.Key!.ToLower() == key!.ToLower() && l.Domain!.ToLower() == domain!.ToLower())
       .AnyAsync();
 
     if (!exists)
@@ -87,10 +87,10 @@ public class LinkRepository : ILinkRepository
   }
 
 
-  public async Task<Link> UpdateLink(string key, string url, string domain)
+  public async Task<Link?> UpdateLink(string? key, string? url, string? domain)
   {
     var link = await _ctx.Links
-      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .Where(l => l.Key!.ToLower() == key!.ToLower() && l.Domain!.ToLower() == domain!.ToLower())
       .FirstOrDefaultAsync();
 
     if (link is not null)
@@ -105,10 +105,10 @@ public class LinkRepository : ILinkRepository
     return null;
   }
 
-  public async Task<bool> DeleteLink(string key, string domain)
+  public async Task<bool> DeleteLink(string? key, string? domain)
   {
     var link = await _ctx.Links
-      .Where(l => l.Key.ToLower() == key.ToLower() && l.Domain.ToLower() == domain.ToLower())
+      .Where(l => l.Key!.ToLower() == key!.ToLower() && l.Domain!.ToLower() == domain!.ToLower())
       .FirstOrDefaultAsync();
 
     if (link is not null)
@@ -123,7 +123,7 @@ public class LinkRepository : ILinkRepository
     return false;
   }
 
-  public async Task<Redirect> InsertRedirect(Redirect redirect)
+  public async Task<Redirect?> InsertRedirect(Redirect redirect)
   {
     _ctx.Redirects.Add(redirect);
     if ((await _ctx.SaveChangesAsync()) > 0)
@@ -138,6 +138,6 @@ public class LinkRepository : ILinkRepository
 
 public class LinkResult
 {
-  public string Domain { get; set; }
-  public IEnumerable<Link> Links { get; set; }
+  public string Domain { get; set; } = "";
+  public IEnumerable<Link> Links { get; set; } = new List<Link>();
 }

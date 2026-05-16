@@ -12,7 +12,7 @@ public class RedirectSummary
   [JsonPropertyName("clickCount")]
   public int ClickCount { get; set; }
   [JsonPropertyName("key")]
-  public string Key { get; set; }
+  public string? Key { get; set; }
   [JsonPropertyName("domain")]
-  public string Domain { get; set; }
+  public string? Domain { get; set; }
 }

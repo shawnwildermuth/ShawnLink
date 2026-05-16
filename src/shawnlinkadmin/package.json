@@ -26,4 +26,5 @@
     "tailwindcss": "^3.4.1",
     "vite": "^8.0.13"
   }
+, "-vs-binding":{"ProjectOpened":["dev"]}
 }

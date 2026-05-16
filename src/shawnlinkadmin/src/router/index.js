@@ -23,7 +23,6 @@ const routes = [
   {
     path: '/editor/:domain/:editKey',
     name: 'EditLink',
-    component: Home,
     component: Editor,
     props: true,
     beforeEnter: confirmLoaded

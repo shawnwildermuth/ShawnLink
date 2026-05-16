@@ -36,7 +36,7 @@ public class AccumulatorBackgroundService : BackgroundService
         _logger.LogInformation($"Processing Redirection for {redirect.Key}");
 
         using var scope = _service.CreateScope();
-        var repo = scope.ServiceProvider.GetService<ILinkRepository>();
+        var repo = scope.ServiceProvider.GetRequiredService<ILinkRepository>();
         await repo.InsertRedirect(redirect);
 
       }

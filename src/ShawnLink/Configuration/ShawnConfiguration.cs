@@ -15,18 +15,18 @@ namespace ShawnLink.Configuration
       config.Bind(this);
     }
 
-    public SecurityConfiguration Security { get; set; }
-    public StorageConfiguration Storage { get; set; }
+    public SecurityConfiguration? Security { get; set; }
+    public StorageConfiguration? Storage { get; set; }
 
     public class StorageConfiguration
     {
-      public string ConnectionString { get; set; }
+      public string ConnectionString { get; set; } = "";
     }
 
     public class SecurityConfiguration
     {
-      public string Username { get; set; }
-      public string Password { get; set; }
+      public string Username { get; set; } = "";
+      public string Password { get; set; } = "";
     }
   }
 }
